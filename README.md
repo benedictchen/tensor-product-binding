@@ -27,9 +27,31 @@ pip install tensor-product-binding
 
 ```python
 import tensor_product_binding
+import numpy as np
 
-# Example usage
-print("✅ Tensor Product Binding loaded successfully!")
+# Create tensor product binding system
+binding = tensor_product_binding.TensorProductBinding(
+    role_dim=50,
+    filler_dim=50
+)
+
+# Create symbolic structures
+sentence = binding.encode_structure({
+    'subject': 'John',
+    'verb': 'loves', 
+    'object': 'Mary'
+})
+
+# Query the structure
+subject = binding.query(sentence, 'subject')
+print(f"✅ Subject: {binding.decode_filler(subject)}")
+
+# Create neural binding network
+neural_net = tensor_product_binding.create_neural_binding_network(
+    role_dim=50,
+    filler_dim=50,
+    backend='numpy'
+)
 ```
 
 ## 🎓 About the Implementation
