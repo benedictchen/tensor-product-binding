@@ -34,3 +34,6 @@ Funding = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = ["--cov=tensor_product_binding", "--cov-report=term-missing"]
+[tool.hatch.build.targets.wheel]
+py-modules = ["tensor_product_binding"]
+only-include = ["*.py", "LICENSE", "README.md"]
