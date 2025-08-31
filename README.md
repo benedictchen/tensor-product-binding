@@ -13,9 +13,9 @@
 
 # Tensor Product Binding
 
-🌟 Structured knowledge representation in neural networks via tensor products
+🔗 Compositional neural representations
 
-**Smolensky, P. (1990)** - "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+**Smolensky, P. (1990) - "Tensor product variable binding"**
 
 ## 📦 Installation
 
@@ -23,11 +23,32 @@
 pip install tensor-product-binding
 ```
 
+## 🚀 Quick Start
+
+```python
+import tensor_product_binding
+
+# Example usage
+print("✅ Tensor Product Binding loaded successfully!")
+```
+
 ## 🎓 About the Implementation
 
 Implemented by **Benedict Chen** - bringing foundational AI research to modern Python.
 
 📧 Contact: benedict@benedictchen.com
+
+## 📖 Citation
+
+If you use this implementation in your research, please cite the original paper:
+
+```bibtex
+Smolensky, P. (1990) - "Tensor product variable binding"
+```
+
+## 📜 License
+
+Custom Non-Commercial License with Donation Requirements - See LICENSE file for details.
 
 ---
 
