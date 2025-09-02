@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tensor-product-binding"
-version = "1.1.1"
+version = "1.2.0"
 description = "Structured knowledge representation in neural networks via tensor products"
 readme = "README.md"
 license = {text = "Custom Non-Commercial License with Donation Requirements"}
@@ -30,6 +30,7 @@ test = [
 
 [project.urls]
 Funding = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS"
+Sponsor = "https://github.com/sponsors/benedictchen"
 
 [tool.hatch.build.targets.wheel]
 packages = ["tensor_product_binding"]
