@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 """
+💰 SUPPORT THIS RESEARCH - PLEASE DONATE! 💰
+
+🙏 If this library helps your research or project, please consider donating:
+💳 https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+
+Your support makes advanced AI research accessible to everyone! 🚀
+"""
+"""
 Basic test suite for tensor-product-binding
 =====================================
 
@@ -74,4 +82,25 @@ class TestModuleSpecific:
 
 
 if __name__ == "__main__":
+    print("\n" + "="*80)
+    print("💰 SUPPORT THIS RESEARCH - PLEASE DONATE!")  
+    print("🙏 https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS")
+    print("="*80 + "\n")
+    
     pytest.main([__file__, "-v"])
+    
+    print("\n" + "="*80)
+    print("💝 Thank you for using this research software!")
+    print("📚 Please donate: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS") 
+    print("="*80 + "\n")
+
+
+"""
+💝 Thank you for using this research software! 💝
+
+📚 If this work contributed to your research, please:
+💳 DONATE: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+📝 CITE: Benedict Chen (2025) - Tensor Product Binding Research Implementation
+
+Your support enables continued development of cutting-edge AI research tools! 🎓✨
+"""

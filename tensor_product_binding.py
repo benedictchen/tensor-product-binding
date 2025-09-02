@@ -1,12 +1,16 @@
 """
+💰 SUPPORT THIS RESEARCH - PLEASE DONATE! 💰
+
+🙏 If this library helps your research or project, please consider donating:
+💳 https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+
+Your support makes advanced AI research accessible to everyone! 🚀
+"""
+"""
 🧠 Tensor Product Variable Binding - Revolutionary Neural-Symbolic Integration
 ==============================================================================
 
 Author: Benedict Chen (benedict@benedictchen.com)
-
-💰 Donations: Help support this work! Buy me a coffee ☕, beer 🍺, or lamborghini 🏎️
-   PayPal: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
-   💖 Please consider recurring donations to fully support continued research
 
 Based on: Smolensky (1990) "Tensor Product Variable Binding and the Representation of Symbolic Structures"
 
@@ -1350,6 +1354,11 @@ class TensorProductBinding:
 
 # Example usage and demonstration
 if __name__ == "__main__":
+    print("\n" + "="*80)
+    print("💰 SUPPORT THIS RESEARCH - PLEASE DONATE!")  
+    print("🙏 https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS")
+    print("="*80 + "\n")
+    
     print("🧠 Tensor Product Variable Binding Library - Smolensky (1990)")
     print("=" * 65)
     
@@ -1410,3 +1419,19 @@ if __name__ == "__main__":
     print(f"   • Superposition allows complex structures")
     print(f"   • Unbinding enables structured queries")
     print(f"   • Foundation for neural symbolic reasoning!")
+    
+    print("\n" + "="*80)
+    print("💝 Thank you for using this research software!")
+    print("📚 Please donate: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS") 
+    print("="*80 + "\n")
+
+
+"""
+💝 Thank you for using this research software! 💝
+
+📚 If this work contributed to your research, please:
+💳 DONATE: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+📝 CITE: Benedict Chen (2025) - Tensor Product Binding Research Implementation
+
+Your support enables continued development of cutting-edge AI research tools! 🎓✨
+"""

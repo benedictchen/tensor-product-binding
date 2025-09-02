@@ -1,4 +1,12 @@
 """
+💰 SUPPORT THIS RESEARCH - PLEASE DONATE! 💰
+
+🙏 If this library helps your research or project, please consider donating:
+💳 https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+
+Your support makes advanced AI research accessible to everyone! 🚀
+"""
+"""
 Symbolic Structure Encoder using Tensor Product Variable Binding
 Based on: Smolensky (1990) "Tensor Product Variable Binding and the Representation of Symbolic Structures"
 
@@ -578,3 +586,14 @@ class SymbolicStructureEncoder:
             "role_types": {role.semantic_type for role in self.role_vocabulary.values()},
             "filler_types": {filler.semantic_type for filler in self.filler_vocabulary.values()}
         }
+
+
+"""
+💝 Thank you for using this research software! 💝
+
+📚 If this work contributed to your research, please:
+💳 DONATE: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+📝 CITE: Benedict Chen (2025) - Tensor Product Binding Research Implementation
+
+Your support enables continued development of cutting-edge AI research tools! 🎓✨
+"""
