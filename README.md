@@ -2,12 +2,17 @@
 
 **🙏 If this library helps your research or project, please consider donating to support continued development:**
 
-**[💳 DONATE VIA PAYPAL - CLICK HERE](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS)**
+<div align="center">
+
+**[💳 DONATE VIA PAYPAL](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS)** | **[❤️ SPONSOR ON GITHUB](https://github.com/sponsors/benedictchen)**
+
+</div>
 
 [![CI](https://github.com/benedictchen/tensor-product-binding/workflows/CI/badge.svg)](https://github.com/benedictchen/tensor-product-binding/actions)
-[![PyPI version](https://badge.fury.io/py/tensor-product-binding.svg)](https://badge.fury.io/py/tensor-product-binding)
+[![PyPI version](https://img.shields.io/pypi/v/tensor-product-binding.svg)](https://pypi.org/project/tensor-product-binding/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-Custom%20Non--Commercial-red.svg)](LICENSE)
+[![Research Accurate](https://img.shields.io/badge/research-accurate-brightgreen.svg)](RESEARCH_FOUNDATION.md)
 
 ---
 
@@ -252,18 +257,123 @@ unbind(structure, role) = structure · role†
 
 Where `⊗` is the tensor product, `·` is the dot product, and `†` indicates the role conjugate.
 
+## 📖 Documentation & Tutorials
+
+- 📚 **[Complete Documentation](https://tensor-product-binding.readthedocs.io/)**
+- 🎓 **[Tutorial Notebooks](https://github.com/benedictchen/tensor-product-binding/tree/main/tutorials)**
+- 🔬 **[Research Foundation](RESEARCH_FOUNDATION.md)**
+- 🎯 **[Advanced Examples](https://github.com/benedictchen/tensor-product-binding/tree/main/examples)**
+- 🐛 **[Issue Tracker](https://github.com/benedictchen/tensor-product-binding/issues)**
+
+## 🤝 Contributing
+
+We welcome contributions! Please see:
+
+- **[Contributing Guidelines](CONTRIBUTING.md)**
+- **[Development Setup](docs/development.md)**  
+- **[Code of Conduct](CODE_OF_CONDUCT.md)**
+
+### Development Installation
+
+```bash
+git clone https://github.com/benedictchen/tensor-product-binding.git
+cd tensor-product-binding
+pip install -e ".[test,dev]"
+pytest tests/
+```
+
+## 📜 Citation
+
+If you use this implementation in academic work, please cite:
+
+```bibtex
+@software{tensor_product_binding_benedictchen,
+    title={Tensor Product Binding: Research-Accurate Implementation of Smolensky's Framework},
+    author={Benedict Chen},
+    year={2025},
+    url={https://github.com/benedictchen/tensor-product-binding},
+    version={1.5.0}
+}
+
+@article{smolensky1990tensor,
+    title={Tensor product variable binding and the representation of symbolic structures in connectionist systems},
+    author={Smolensky, Paul},
+    journal={Artificial intelligence},
+    volume={46},
+    number={1-2},
+    pages={159--216},
+    year={1990},
+    publisher={Elsevier}
+}
+```
+
+## 📋 License
+
+**Custom Non-Commercial License with Donation Requirements** - See [LICENSE](LICENSE) file for details.
+
 ## 🎓 About the Implementation
 
-Implemented by **Benedict Chen** - bringing foundational AI research to modern Python.
+**Implemented by Benedict Chen** - Bringing foundational AI research to modern Python.
 
-📧 Contact: benedict@benedictchen.com
+📧 **Contact**: benedict@benedictchen.com  
+🐙 **GitHub**: [@benedictchen](https://github.com/benedictchen)
 
 ---
 
-## 💰 Support This Work - Donation Appreciated!
+## 💰 Support This Work - Choose Your Adventure!
 
 **This implementation represents hundreds of hours of research and development. If you find it valuable, please consider donating:**
 
-**[💳 DONATE VIA PAYPAL - CLICK HERE](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS)**
+### 🎯 Donation Tier Goals (With Tensor Product Humor)
 
-**Your support helps maintain and expand these research implementations! 🙏**
+**☕ $5 - Buy Benedict Coffee**  
+*"Coffee binds with my neurons in a perfect tensor product! Input: caffeine, Role: alertness, Output: productive coding."*  
+💳 [PayPal One-time](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS) | ❤️ [GitHub Monthly](https://github.com/sponsors/benedictchen)
+
+**🍕 $25 - Pizza Fund**  
+*"Pizza provides the hierarchical structure my brain needs! Each slice is a filler, each hunger pang is a role to bind."*  
+💳 [PayPal One-time](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS) | ❤️ [GitHub Monthly](https://github.com/sponsors/benedictchen)
+
+**🏠 $500,000 - Buy Benedict a House**  
+*"With rooms organized as a tensor product space! Each room will represent a different binding dimension."*  
+💳 [PayPal Challenge](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS) | ❤️ [GitHub Lifetime](https://github.com/sponsors/benedictchen)
+
+**🏎️ $200,000 - Lamborghini Fund**  
+*"For high-speed compositional semantics! The car's role: transportation, The filler: style. Perfect binding!"*  
+💳 [PayPal Supercar](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS) | ❤️ [GitHub Lifetime](https://github.com/sponsors/benedictchen)
+
+**✈️ $50,000,000 - Private Jet**  
+*"To visit conferences on neural binding! My flight path will demonstrate perfect compositional systematicity."*  
+💳 [PayPal Aerospace](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS) | ❤️ [GitHub Aviation](https://github.com/sponsors/benedictchen)
+
+**🏝️ $100,000,000 - Private Island**  
+*"Where every palm tree represents a different tensor dimension! The ultimate distributed representation paradise."*  
+💳 [PayPal Paradise](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS) | ❤️ [GitHub Tropical](https://github.com/sponsors/benedictchen)
+
+### 🎪 Monthly Subscription Tiers (GitHub Sponsors)
+
+**🧬 Neural Binder ($10/month)** - *"Monthly support for maintaining perfect role-filler binding in my research!"*  
+❤️ [Subscribe on GitHub](https://github.com/sponsors/benedictchen)
+
+**🕰️ Compositional Semanticist ($25/month)** - *"Help me compose the meaning of sustainable research!"*  
+❤️ [Subscribe on GitHub](https://github.com/sponsors/benedictchen)
+
+**🏆 Tensor Master ($100/month)** - *"Elite support for the ultimate hierarchical structure of coding excellence!"*  
+❤️ [Subscribe on GitHub](https://github.com/sponsors/benedictchen)
+
+<div align="center">
+
+**One-time donation?**  
+**[💳 DONATE VIA PAYPAL](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS)**
+
+**Ongoing support?**  
+**[❤️ SPONSOR ON GITHUB](https://github.com/sponsors/benedictchen)**
+
+**Can't decide?**  
+**Why not both?** 🤷‍♂️
+
+</div>
+
+**Every contribution creates a perfect tensor product with my gratitude! Your support binds beautifully with my motivation for continued research! 🚀**
+
+*P.S. - If you help me get that tensor dimension island, I promise to name a binding operation after you!*
