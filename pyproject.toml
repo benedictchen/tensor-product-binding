@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tensor-product-binding"
-version = "1.0.0"
+version = "1.1.0"
 description = "Structured knowledge representation in neural networks via tensor products"
 readme = "README.md"
 license = {text = "Custom Non-Commercial License with Donation Requirements"}
