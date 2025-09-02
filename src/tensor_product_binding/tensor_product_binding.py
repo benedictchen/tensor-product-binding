@@ -7,6 +7,68 @@ knowledge representation in connectionist systems.
 
 Based on: Smolensky (1990) "Tensor Product Variable Binding and the Representation of Symbolic Structures"
 
+# FIXME: Critical Research Accuracy Issues - Overall Architecture Based on Smolensky (1990)
+#
+# 1. MISSING FUNDAMENTAL THEORETICAL COMPONENTS
+#    - Smolensky's framework includes role decomposition and filler decomposition
+#    - Missing proper tensor algebra foundation with rank preservation
+#    - No implementation of Smolensky's "activity vectors" vs "weight vectors" distinction
+#    - Missing "tensor product representations" (TPRs) as formal mathematical objects
+#    - Solutions:
+#      a) Implement formal TPR class with rank tracking and tensor operations
+#      b) Add role/filler decomposition methods based on Smolensky's theoretical framework
+#      c) Distinguish between activation patterns and weight patterns
+#      d) Implement tensor rank analysis and optimization
+#    - Research basis: Smolensky (1990) Section 2-3, mathematical foundations
+#
+# 2. INCORRECT CONNECTIONIST IMPLEMENTATION APPROACH
+#    - Current implementation focuses on vector operations, not neural network units
+#    - Smolensky's work emphasized neural unit activity patterns and weight matrices
+#    - Missing connection to actual connectionist architectures
+#    - No implementation of "product units" that compute role×filler interactions
+#    - Solutions:
+#      a) Implement neural unit-based TPR with activation functions
+#      b) Add product units: output = f(Σ role_i × filler_j × weight_ij)
+#      c) Connect to actual neural network training and inference
+#      d) Implement biologically plausible learning rules for TPR
+#    - Research basis: Smolensky emphasized neural implementation, not just mathematical abstraction
+#
+# 3. MISSING SYSTEMATICITY AND COMPOSITIONALITY PRINCIPLES
+#    - No enforcement of Smolensky's systematicity principle in implementation
+#    - Missing productivity constraints (ability to generate infinite novel combinations)
+#    - No implementation of constituency relations between composed structures
+#    - Missing recursive compositional structure support
+#    - Solutions:
+#      a) Add systematicity validation: if system knows "John loves Mary", it should handle "Mary loves John"
+#      b) Implement productivity measures and capacity estimation
+#      c) Add constituency parsing and structure recovery
+#      d) Support recursive embedding: [[John loves Mary] causes [Tom to smile]]
+#    - Research basis: Smolensky's core argument for symbolic-connectionist integration
+#
+# 4. INADEQUATE DISTRIBUTED REPRESENTATION THEORY
+#    - Missing proper micro-feature analysis of roles and fillers
+#    - No implementation of distributed similarity structure in vector spaces
+#    - Missing Smolensky's "constituent structure" vs "activation structure" distinction
+#    - No support for continuous/graded representations
+#    - Solutions:
+#      a) Implement micro-feature decomposition of symbolic concepts
+#      b) Add distributed similarity metrics and clustering
+#      c) Separate constituent structure from activation patterns
+#      d) Support graded membership and fuzzy binding strengths
+#    - Research basis: Smolensky (1990) Section 4-5, distributed representation theory
+#
+# 5. MISSING LEARNING AND ADAPTATION MECHANISMS
+#    - No learning algorithm for acquiring role-filler bindings from experience
+#    - Missing weight adaptation rules for improving binding quality
+#    - No error-driven learning as in Smolensky's connectionist framework
+#    - Missing capacity for acquiring new roles and fillers through learning
+#    - Solutions:
+#      a) Implement Hebbian learning: weight_ij += α × role_i × filler_j
+#      b) Add error-driven learning with backpropagation through TPR structures
+#      c) Implement unsupervised discovery of role-filler patterns
+#      d) Add online adaptation and forgetting mechanisms
+#    - Research basis: Smolensky's framework includes learning as essential component
+
 Key Features:
 🧠 Neural-compatible structured representation
 ⚡ Tensor product operations for variable binding
@@ -250,6 +312,68 @@ class TensorProductBinding:
         binding_type: Union[str, BindingOperation] = BindingOperation.OUTER_PRODUCT,
         normalize_vectors: bool = True,
         random_seed: Optional[int] = None
+        # FIXME: Critical Theoretical Issues in TensorProductBinding __init__
+        #
+        # 1. INCORRECT DEFAULT DIMENSIONS (64x64 vs research-accurate sizes)
+        #    - Smolensky (1990) used much smaller dimensions (8-16) for theoretical examples
+        #    - Large dimensions (64x64=4096) create computational issues and memory problems
+        #    - Tensor product binding suffers from dimensionality explosion
+        #    - Solutions:
+        #      a) Reduce defaults: role_dimension=16, filler_dimension=16 
+        #      b) Add warning for large tensor products: dimension > 32x32
+        #      c) Implement compressed tensor representation (rank-limited)
+        #    - Research note: Smolensky's original examples used small symbolic vectors
+        #    - Example:
+        #      ```python
+        #      if role_dimension * filler_dimension > 1024:
+        #          warnings.warn("Large tensor product may cause memory issues. "
+        #                       "Consider circular_convolution binding for large dimensions.")
+        #      ```
+        #
+        # 2. MISSING DISTRIBUTED REPRESENTATION PARAMETERS  
+        #    - No sparsity control for role/filler vectors
+        #    - Missing orthogonality constraints between roles
+        #    - No semantic similarity structure in vector space
+        #    - Solutions:
+        #      a) Add: sparsity_level: float = 0.1  # Fraction of non-zero elements
+        #      b) Add: orthogonal_roles: bool = True  # Enforce role orthogonality
+        #      c) Add: semantic_structure: Optional[Dict] = None  # Similarity constraints
+        #    - Research basis: Distributed representations need structured vector spaces
+        #
+        # 3. WRONG DEFAULT BINDING TYPE (OUTER_PRODUCT vs CIRCULAR_CONVOLUTION)
+        #    - Outer product creates dimensional explosion (role_dim × filler_dim)
+        #    - Circular convolution preserves dimensionality (preferred for neural networks)
+        #    - Smolensky's original work predates efficient circular convolution methods
+        #    - Solutions:
+        #      a) Change default: binding_type = BindingOperation.CIRCULAR_CONVOLUTION
+        #      b) Add automatic selection based on dimensions
+        #      c) Implement hybrid approaches (compressed tensor products)
+        #    - Modern consensus: Circular convolution better for large-scale applications
+        #
+        # 4. MISSING NEURAL IMPLEMENTATION PARAMETERS
+        #    - No noise tolerance specifications
+        #    - Missing graceful degradation parameters
+        #    - No learning rate for adaptive binding strength
+        #    - Solutions:
+        #      a) Add: noise_tolerance: float = 0.1  # Robustness to neural noise
+        #      b) Add: degradation_rate: float = 0.05  # Graceful degradation rate
+        #      c) Add: adaptive_binding: bool = False  # Learn binding strengths
+        #    - Example:
+        #      ```python
+        #      # Neural compatibility parameters
+        #      self.noise_tolerance = noise_tolerance
+        #      self.degradation_rate = degradation_rate
+        #      ```
+        #
+        # 5. MISSING COMPOSITIONAL SYSTEMATICITY CONTROLS
+        #    - No productivity constraints (infinite novel combinations)
+        #    - Missing systematicity validation (role-filler independence)
+        #    - No compositionality metrics
+        #    - Solutions:
+        #      a) Add: max_composition_depth: int = 10  # Prevent infinite recursion
+        #      b) Add: systematicity_check: bool = True  # Validate role-filler independence  
+        #      c) Add: compositionality_metrics: bool = False  # Track systematicity
+        #    - Critical for cognitive architecture applications
     ):
         # Validate inputs
         if role_dimension <= 0 or filler_dimension <= 0:
@@ -399,6 +523,90 @@ class TensorProductBinding:
         """
         Bind a role vector with a filler vector.
         
+        # FIXME: Critical Issues in bind() Method - Core TPB Functionality
+        #
+        # 1. INCORRECT TENSOR PRODUCT IMPLEMENTATION
+        #    - Current np.outer().flatten() is not true tensor product binding
+        #    - Missing proper tensor algebra operations
+        #    - Should preserve tensor structure for compositional operations
+        #    - Solutions:
+        #      a) Implement proper tensor product: bound_data = np.kron(role.data, filler.data)
+        #      b) Maintain tensor structure: bound_tensor = role[:, None] * filler[None, :]
+        #      c) Add tensor rank preservation for nested bindings
+        #    - Research note: Smolensky emphasized preservation of algebraic structure
+        #    - CODE REVIEW SUGGESTION - Replace current implementation with proper tensor algebra:
+        #      ```python
+        #      def bind_tensor_product_proper(self, role: TPBVector, filler: TPBVector, 
+        #                                     binding_strength: float = 1.0) -> TPBVector:
+        #          """Proper tensor product binding preserving algebraic structure"""
+        #          # Validation (addresses FIXME #4)
+        #          if role.role is None:
+        #              warnings.warn("First argument should be a role vector")
+        #          if filler.filler is None:
+        #              warnings.warn("Second argument should be a filler vector")
+        #          
+        #          # Check for dimensional explosion
+        #          tensor_size = len(role.data) * len(filler.data)
+        #          if tensor_size > 1024:
+        #              warnings.warn(f"Large tensor product ({len(role.data)}×{len(filler.data)}={tensor_size})")
+        #          
+        #          # Method 1: Kronecker product (preserves all tensor structure)
+        #          bound_tensor = np.kron(role.data, filler.data)
+        #          
+        #          # Method 2: Maintain 2D matrix structure for unbinding
+        #          bound_matrix = np.outer(role.data, filler.data)
+        #          
+        #          # Apply binding strength (addresses FIXME #3)
+        #          bound_tensor *= binding_strength
+        #          
+        #          return TPBVector(
+        #              data=bound_tensor,
+        #              role=role.role, filler=filler.filler, is_bound=True,
+        #              binding_info={
+        #                  'operation': 'tensor_product',
+        #                  'tensor_shape': (len(role.data), len(filler.data)),
+        #                  'binding_strength': binding_strength,
+        #                  'preserves_structure': True,
+        #                  'original_matrix': bound_matrix  # For proper unbinding
+        #              }
+        #          )
+        #      ```
+        #
+        # 2. CIRCULAR CONVOLUTION IMPLEMENTATION ERRORS
+        #    - FFT-based implementation may introduce numerical artifacts
+        #    - Missing normalization and phase handling
+        #    - No error handling for complex FFT results
+        #    - Solutions:
+        #      a) Add proper normalization: bound_data = bound_data / np.sqrt(len(role.data))
+        #      b) Handle complex results: bound_data = np.real(bound_data)
+        #      c) Implement direct circular convolution for small vectors
+        #    - Mathematical basis: Circular convolution should preserve vector norms
+        #
+        # 3. MISSING BINDING STRENGTH PARAMETER
+        #    - No control over binding strength/confidence
+        #    - Should support weighted bindings for semantic gradation
+        #    - Missing binding decay for temporal/contextual effects
+        #    - Solutions:
+        #      a) Add binding_strength parameter: bound_data *= binding_strength
+        #      b) Implement semantic distance weighting
+        #      c) Add temporal decay: strength *= exp(-time_decay)
+        #
+        # 4. NO BINDING VALIDATION OR CONSTRAINTS
+        #    - Missing validation of role vs filler vector types
+        #    - No semantic consistency checking
+        #    - Should prevent invalid bindings (e.g., role-role bindings)
+        #    - Solutions:
+        #      a) Validate vector types before binding
+        #      b) Add semantic constraint checking
+        #      c) Implement binding compatibility matrix
+        #    - Example:
+        #      ```python
+        #      if role.role is None:
+        #          warnings.warn("First argument should be a role vector")
+        #      if filler.filler is None:
+        #          warnings.warn("Second argument should be a filler vector")
+        #      ```
+        
         Parameters
         ----------
         role : TPBVector
@@ -485,6 +693,56 @@ class TensorProductBinding:
         """
         Unbind a bound vector using a probe vector to retrieve the associated component.
         
+        # FIXME: Critical Issues in unbind() Method - Core Tensor Product Unbinding
+        #
+        # 1. INCORRECT TENSOR PRODUCT UNBINDING MATHEMATICS
+        #    - Current matrix operations are approximations, not proper tensor unbinding
+        #    - Smolensky (1990) requires tensor contraction for exact unbinding
+        #    - Missing proper tensor algebra: should use tensor contraction operations
+        #    - Solutions:
+        #      a) Implement tensor contraction: result = np.tensordot(bound_tensor, probe_vector, axes=1)
+        #      b) Use proper tensor inverse operations when available
+        #      c) Implement SVD-based approximate unbinding for noisy conditions
+        #    - Research basis: Smolensky emphasized exact mathematical relationships for unbinding
+        #    - Example:
+        #      ```python
+        #      # Proper tensor contraction unbinding
+        #      if probe_vector.role is not None:  # Role probe
+        #          bound_matrix = bound_vector.data.reshape(self.role_dimension, self.filler_dimension)
+        #          # Contract along role dimension: sum_i probe_i * bound_matrix[i,:]
+        #          unbound_data = np.tensordot(probe_vector.data, bound_matrix, axes=([0], [0]))
+        #      ```
+        #
+        # 2. MISSING DISTRIBUTED REPRESENTATION CONSIDERATIONS
+        #    - No handling of interference from multiple bindings in superposed structures
+        #    - Unbinding should account for cross-talk between different role-filler pairs
+        #    - Missing noise robustness in unbinding process
+        #    - Solutions:
+        #      a) Implement interference cancellation for composite structures
+        #      b) Add noise-robust unbinding with confidence intervals
+        #      c) Use iterative unbinding to improve accuracy
+        #    - Research basis: Smolensky discussed graceful degradation with multiple bindings
+        #
+        # 3. APPROXIMATE UNBINDING WITHOUT ERROR QUANTIFICATION
+        #    - No measurement of unbinding accuracy or confidence
+        #    - Missing error propagation from binding to unbinding
+        #    - Should provide quality metrics for retrieved vectors
+        #    - Solutions:
+        #      a) Add confidence scoring: confidence = similarity(unbound_result, expected)
+        #      b) Implement error bounds estimation
+        #      c) Return tuple: (unbound_vector, confidence_score, error_estimate)
+        #    - Critical for practical applications requiring reliability assessment
+        #
+        # 4. CIRCULAR_CONVOLUTION UNBINDING INSTABILITIES
+        #    - FFT-based inverse can be numerically unstable
+        #    - Division by small FFT coefficients causes artifacts
+        #    - No regularization or stability checking
+        #    - Solutions:
+        #      a) Add regularization: inverse_fft = 1.0 / (fft + regularization_term)
+        #      b) Use Tikhonov regularization for stable inversion
+        #      c) Implement direct correlation-based unbinding as fallback
+        #    - Mathematical basis: Regularized pseudoinverse for stability
+        
         Parameters
         ----------
         bound_vector : TPBVector
@@ -560,6 +818,59 @@ class TensorProductBinding:
         
         This implements superposition - adding multiple bound vectors together
         to create a composite representation.
+        
+        # FIXME: Critical Issues in compose() Method - Compositional Structure Formation
+        #
+        # 1. NAIVE SUPERPOSITION WITHOUT INTERFERENCE MANAGEMENT
+        #    - Simple vector addition causes interference between bindings
+        #    - Smolensky (1990) emphasized the importance of managing interference in superposed structures
+        #    - No consideration of binding strength or salience weighting
+        #    - Solutions:
+        #      a) Implement weighted superposition: composite = Σ(weight_i * bound_vector_i)
+        #      b) Add interference reduction through orthogonal role design
+        #      c) Implement adaptive normalization to prevent saturation
+        #    - Research basis: Smolensky discussed interference as key limitation of superposition
+        #    - Example:
+        #      ```python
+        #      # Weighted composition with interference consideration
+        #      composite_data = np.zeros_like(bound_vectors[0].data)
+        #      total_weight = 0
+        #      for i, vec in enumerate(bound_vectors):
+        #          weight = self.compute_salience_weight(vec)  # Based on semantic importance
+        #          composite_data += weight * vec.data
+        #          total_weight += weight
+        #      composite_data /= total_weight  # Normalize
+        #      ```
+        #
+        # 2. MISSING COMPOSITIONAL SYSTEMATICITY CONSTRAINTS
+        #    - No validation that composed bindings follow systematic compositional rules
+        #    - Missing check for role-filler consistency across composed structures
+        #    - Should enforce Smolensky's systematicity principle
+        #    - Solutions:
+        #      a) Validate role uniqueness: each role should appear at most once
+        #      b) Check semantic consistency between bound pairs
+        #      c) Implement compositional well-formedness constraints
+        #    - Research basis: Systematicity is core to Smolensky's compositional architecture
+        #
+        # 3. NO CAPACITY LIMITS OR DEGRADATION HANDLING
+        #    - Unlimited composition can lead to vector saturation
+        #    - Missing graceful degradation when too many bindings are composed
+        #    - No capacity estimation based on vector dimensionality
+        #    - Solutions:
+        #      a) Implement capacity limit: max_bindings = sqrt(vector_dimension)
+        #      b) Add saturation detection and warning
+        #      c) Implement compression for large compositions
+        #    - Mathematical basis: Vector space capacity limits composition size
+        #
+        # 4. MISSING STRUCTURAL RELATIONSHIPS BETWEEN BINDINGS
+        #    - No representation of relationships between composed bindings
+        #    - Missing hierarchical or dependency structure in composition
+        #    - Should support nested compositional structures
+        #    - Solutions:
+        #      a) Add binding dependency tracking
+        #      b) Implement hierarchical composition with structural roles
+        #      c) Support recursive tensor product structures
+        #    - Research basis: Smolensky's framework supports recursive compositional structure
         
         Parameters
         ----------

@@ -27,39 +27,141 @@ in neural networks using tensor products to bind variables with values.
 - Compositional semantics
 - Neural binding networks
 - Modular architecture for flexibility
+
+🏗️ Modular Architecture:
+This package is organized into clean, focused modules:
+- core: Core binding operations and algorithms
+- config: Configuration classes and enums
+- utils: Utility functions and helpers
+- visualization: Plotting and analysis tools
 """
 
-from .symbolic_structures import SymbolicStructureEncoder as _SSE, TreeNode as _TreeNode
-from .neural_binding import NeuralBindingNetwork as _NBN
-from .compositional_semantics import CompositionalSemantics as _CS
+# Core tensor product binding functionality
+from .core import (
+    TensorProductBinding,
+    TPBVector,
+    BindingOperation,
+    VectorSpace,
+    SymbolicVector,
+    bind_vectors,
+    unbind_vectors,
+    cleanup_vector
+)
 
-class SymbolicStructureEncoder:
-    def __init__(self, **kwargs):
-        self._impl = _SSE(**kwargs)
-    
-    def __getattr__(self, name):
-        return getattr(self._impl, name)
+# Configuration and enums
+from .config import (
+    BindingMethod,
+    UnbindingMethod,
+    VectorSpaceType,
+    StructureType,
+    TensorBindingConfig,
+    BindingPair,
+    VectorSpaceConfig,
+    PerformanceConfig,
+    DEFAULT_CONFIG,
+    DEFAULT_VECTOR_DIM,
+    DEFAULT_BINDING_STRENGTH,
+    OPTIMIZATION_PRESETS,
+    apply_preset,
+    get_preset_description,
+    list_presets
+)
 
-class TreeNode:
-    def __init__(self, **kwargs):
-        self._impl = _TreeNode(**kwargs)
+# Utility functions
+from .utils import (
+    # Vector utilities
+    cosine_similarity,
+    create_normalized_vector,
+    create_orthogonal_vectors,
+    vector_similarity_matrix,
+    normalize_vector,
+    random_unit_vector,
     
-    def __getattr__(self, name):
-        return getattr(self._impl, name)
+    # Validation
+    validate_vector_dimensions,
+    validate_binding_parameters,
+    validate_config,
+    check_orthogonality,
+    validate_structure,
+    
+    # Math utilities
+    soft_threshold,
+    gaussian_noise,
+    outer_product_flatten,
+    matrix_to_vector,
+    vector_to_matrix,
+    safe_divide,
+    entropy,
+    
+    # Performance
+    benchmark_binding_operation,
+    profile_memory_usage,
+    timing_decorator,
+    batch_process,
+    parallel_map,
+    
+    # Data utilities
+    save_binding_state,
+    load_binding_state,
+    export_vectors_csv,
+    import_vectors_csv,
+    serialize_config,
+    deserialize_config,
+    
+    # Analysis
+    analyze_binding_quality,
+    compute_structure_complexity,
+    measure_semantic_coherence,
+    binding_statistics,
+    vector_space_analysis
+)
 
-class NeuralBindingNetwork:
-    def __init__(self, **kwargs):
-        self._impl = _NBN(**kwargs)
-    
-    def __getattr__(self, name):
-        return getattr(self._impl, name)
+# Visualization (optional - may not be available if dependencies missing)
+try:
+    from .visualization import (
+        # Vector plots
+        plot_vector,
+        plot_vector_comparison,
+        plot_similarity_matrix,
+        plot_vector_space,
+        plot_pca_projection,
+        
+        # Binding plots
+        plot_binding_operation,
+        plot_unbinding_quality,
+        plot_binding_statistics,
+        plot_reconstruction_accuracy,
+        
+        # Structure plots
+        plot_structure_tree,
+        plot_compositional_structure,
+        plot_hierarchical_binding,
+        plot_semantic_network,
+        
+        # Analysis plots
+        plot_quality_metrics,
+        plot_complexity_analysis,
+        plot_coherence_analysis,
+        plot_performance_benchmark,
+        
+        # Interactive
+        create_interactive_vector_explorer,
+        create_binding_dashboard,
+        create_structure_inspector
+    )
+    VISUALIZATION_AVAILABLE = True
+except ImportError:
+    VISUALIZATION_AVAILABLE = False
 
-class CompositionalSemantics:
-    def __init__(self, **kwargs):
-        self._impl = _CS(**kwargs)
-    
-    def __getattr__(self, name):
-        return getattr(self._impl, name)
+# Legacy and compatibility imports (connect to old implementations)
+try:
+    from .symbolic_structures import SymbolicStructureEncoder, TreeNode
+    from .neural_binding import NeuralBindingNetwork
+    from .compositional_semantics import CompositionalSemantics
+    LEGACY_MODULES_AVAILABLE = True
+except ImportError:
+    LEGACY_MODULES_AVAILABLE = False
+
 
 def _print_attribution():
     """Print attribution message with donation link"""
@@ -85,36 +187,45 @@ def _print_attribution():
         print("   ☕ Buy me a coffee → 🍺 Buy me a beer → 🏎️ Buy me a Lamborghini → ✈️ Buy me a private jet!")
         print("   (Start small, dream big! Every donation helps! 😄)")
 
-from .tpb_modules import (
-    BindingOperation,
-    BindingMethod, 
-    UnbindingMethod,
-    TensorBindingConfig,
-    BindingPair,
-    TPBVector,
-    CoreBinding
-)
 
-from .tensor_product_binding import TensorProductBinding as _TPB
-
-class TensorProductBinding:
-    def __init__(self, vector_dim: int = 100, role_dimension: int = None, 
-                 filler_dimension: int = None, **kwargs):
-        if role_dimension is None:
-            role_dimension = vector_dim
-        if filler_dimension is None:
-            filler_dimension = vector_dim
-            
-        self._impl = _TPB(
-            role_dimension=role_dimension,
-            filler_dimension=filler_dimension,
-            **kwargs
-        )
+# Convenience factory functions
+def create_tpb_system(vector_dim: int = 100, **kwargs) -> TensorProductBinding:
+    """
+    Create a tensor product binding system with sensible defaults.
     
-    def __getattr__(self, name):
-        return getattr(self._impl, name)
+    Parameters
+    ----------
+    vector_dim : int, default=100
+        Dimension of role and filler vectors
+    **kwargs
+        Additional configuration parameters
+        
+    Returns
+    -------
+    TensorProductBinding
+        Configured TPB system
+    """
+    return TensorProductBinding(vector_dim=vector_dim, **kwargs)
+
 
 def create_neural_binding_network(network_type="pytorch", *args, **kwargs):
+    """
+    Create a neural binding network (if legacy modules are available).
+    
+    Parameters
+    ----------
+    network_type : str, default="pytorch"
+        Type of network to create
+    *args, **kwargs
+        Arguments to pass to the network constructor
+        
+    Returns
+    -------
+    Neural binding network instance
+    """
+    if not LEGACY_MODULES_AVAILABLE:
+        raise ImportError("Neural binding network modules not available")
+    
     from .neural_binding import PyTorchBindingNetwork, NumPyBindingNetwork
     
     if network_type.lower() == "pytorch":
@@ -124,43 +235,149 @@ def create_neural_binding_network(network_type="pytorch", *args, **kwargs):
     else:
         return NeuralBindingNetwork(*args, **kwargs)
 
-def create_tpb_system(*args, **kwargs):
-    return TensorProductBinding(*args, **kwargs)
 
 # Show attribution on library import
 _print_attribution()
 
-__version__ = "1.0.0"
-__authors__ = ["Based on Smolensky (1990)"]
+__version__ = "1.2.0"  # Updated for modular architecture
+__authors__ = ["Benedict Chen", "Based on Smolensky (1990)"]
 
+# Clean, organized exports
 __all__ = [
-    # Core modular classes (implemented)
-    "BindingOperation",
-    "BindingMethod", 
-    "UnbindingMethod",
-    "TensorBindingConfig", 
-    "BindingPair",
-    "TPBVector",
-    "CoreBinding",
+    # === CORE FUNCTIONALITY ===
     
-    # Main interface (backward compatibility)
+    # Main classes
     "TensorProductBinding",
+    "TPBVector", 
+    "VectorSpace",
+    "SymbolicVector",
     
-    # Connected scattered implementations (REAL)
-    "SymbolicStructureEncoder", 
-    "TreeNode",
-    "NeuralBindingNetwork",
-    "CompositionalSemantics",
+    # Core operations
+    "bind_vectors",
+    "unbind_vectors", 
+    "cleanup_vector",
     
-    # Placeholders that still need implementation
-    "SymbolicStructure",
-    "StructureType", 
-    "PyTorchBindingNetwork",
-    "NumPyBindingNetwork", 
+    # === CONFIGURATION ===
+    
+    # Enumerations
+    "BindingOperation",
+    "BindingMethod",
+    "UnbindingMethod", 
+    "VectorSpaceType",
+    "StructureType",
+    
+    # Configuration classes
+    "TensorBindingConfig",
+    "BindingPair",
+    "VectorSpaceConfig",
+    "PerformanceConfig",
+    
+    # Default configurations
+    "DEFAULT_CONFIG",
+    "DEFAULT_VECTOR_DIM", 
+    "DEFAULT_BINDING_STRENGTH",
+    "OPTIMIZATION_PRESETS",
+    
+    # Configuration utilities
+    "apply_preset",
+    "get_preset_description",
+    "list_presets",
+    
+    # === UTILITIES ===
+    
+    # Vector utilities
+    "cosine_similarity",
+    "create_normalized_vector",
+    "create_orthogonal_vectors", 
+    "vector_similarity_matrix",
+    "normalize_vector",
+    "random_unit_vector",
+    
+    # Validation
+    "validate_vector_dimensions",
+    "validate_binding_parameters",
+    "validate_config",
+    "check_orthogonality",
+    "validate_structure",
+    
+    # Math utilities
+    "soft_threshold",
+    "gaussian_noise",
+    "outer_product_flatten",
+    "matrix_to_vector",
+    "vector_to_matrix",
+    "safe_divide", 
+    "entropy",
+    
+    # Performance utilities
+    "benchmark_binding_operation",
+    "profile_memory_usage",
+    "timing_decorator",
+    "batch_process",
+    "parallel_map",
+    
+    # Data utilities
+    "save_binding_state",
+    "load_binding_state",
+    "export_vectors_csv",
+    "import_vectors_csv",
+    "serialize_config",
+    "deserialize_config",
+    
+    # Analysis utilities
+    "analyze_binding_quality",
+    "compute_structure_complexity", 
+    "measure_semantic_coherence",
+    "binding_statistics",
+    "vector_space_analysis",
+    
+    # === FACTORY FUNCTIONS ===
+    "create_tpb_system",
     "create_neural_binding_network",
-    "ConceptualSpace",
-    "SemanticRole"
 ]
+
+# Add visualization exports if available
+if VISUALIZATION_AVAILABLE:
+    __all__.extend([
+        # Vector plots
+        "plot_vector",
+        "plot_vector_comparison",
+        "plot_similarity_matrix",
+        "plot_vector_space", 
+        "plot_pca_projection",
+        
+        # Binding plots
+        "plot_binding_operation",
+        "plot_unbinding_quality",
+        "plot_binding_statistics",
+        "plot_reconstruction_accuracy",
+        
+        # Structure plots
+        "plot_structure_tree",
+        "plot_compositional_structure",
+        "plot_hierarchical_binding",
+        "plot_semantic_network",
+        
+        # Analysis plots
+        "plot_quality_metrics",
+        "plot_complexity_analysis", 
+        "plot_coherence_analysis",
+        "plot_performance_benchmark",
+        
+        # Interactive
+        "create_interactive_vector_explorer",
+        "create_binding_dashboard",
+        "create_structure_inspector",
+    ])
+
+# Add legacy exports if available
+if LEGACY_MODULES_AVAILABLE:
+    __all__.extend([
+        "SymbolicStructureEncoder",
+        "TreeNode", 
+        "NeuralBindingNetwork",
+        "CompositionalSemantics",
+    ])
 
 """
 💝 Thank you for using this research software! 💝
@@ -171,4 +388,12 @@ __all__ = [
 📝 CITE: Benedict Chen (2025) - Tensor Product Binding Research Implementation
 
 Your support enables continued development of cutting-edge AI research tools! 🎓✨
+
+🏗️ Modular Architecture Benefits:
+- Clean separation of concerns
+- Easy testing and debugging
+- Extensible design patterns
+- Comprehensive utility functions
+- Professional visualization tools
+- Research-grade implementations
 """
