@@ -1,10 +1,10 @@
 """
-=° SUPPORT THIS RESEARCH - PLEASE DONATE! =°
+ğŸ’° SUPPORT THIS RESEARCH - PLEASE DONATE! ğŸ’°
 
-=O If this library helps your research or project, please consider donating:
-=³ https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+ğŸ™ If this library helps your research or project, please consider donating:
+ğŸ’³ https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
 
-Your support makes advanced AI research accessible to everyone! =€
+Your support makes advanced AI research accessible to everyone! ğŸš€
 """
 """
 Tensor Product Binding Tests
@@ -12,11 +12,11 @@ Tensor Product Binding Tests
 
 
 """
-= Thank you for using this research software! =
+ğŸ§  Thank you for using this research software! ğŸ§ 
 
-=Ú If this work contributed to your research, please:
-=³ DONATE: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
-=İ CITE: Benedict Chen (2025) - Tensor Product Binding Research Implementation
+ğŸ“š If this work contributed to your research, please:
+ğŸ’° DONATE: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+ğŸ“– CITE: Benedict Chen (2025) - Tensor Product Binding Research Implementation
 
-Your support enables continued development of cutting-edge AI research tools! <“(
+Your support enables continued development of cutting-edge AI research tools! ğŸ¯
 """

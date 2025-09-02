@@ -38,4 +38,20 @@ packages = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-addopts = ["--cov=src/tensor_product_binding", "--cov-report=term-missing"]
+addopts = [
+    "--import-mode=importlib",
+    "--cov=src/tensor_product_binding", 
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--strict-markers",
+    "--strict-config",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "parametrize: marks parametrized tests",
+    "performance: marks tests as performance tests",
+    "research_aligned: marks tests as validating research paper accuracy",
+    "mathematical: marks tests as validating mathematical properties",
+]
