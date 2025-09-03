@@ -560,7 +560,7 @@ if __name__ == "__main__":
     print("=" * 60)
     print("📊 MODULE CONTENTS:")
     print("  • TensorProductBinding - Main TPB system implementation")
-    print("  • Comprehensive FIXME solutions with multiple user-configurable options")
+    print("  • Comprehensive research solutions with multiple user-configurable options")
     print("  • Research-accurate Smolensky (1990) tensor product binding")
     print("  • Complete binding, unbinding, and composition functionality")
     print("")

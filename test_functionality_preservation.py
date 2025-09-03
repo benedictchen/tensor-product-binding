@@ -58,7 +58,7 @@ def test_existing_functionality_preserved():
             create_cnn_binder,
             create_hybrid_binder
         )
-        print("✅ New neural implementations imported successfully")
+        print("✅ Neural implementations imported")
     except ImportError as e:
         print(f"❌ New neural imports failed: {e}")
         return False
