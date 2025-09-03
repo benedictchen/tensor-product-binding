@@ -19,18 +19,44 @@ class BindingOperation(Enum):
     🔗 Types of binding operations for tensor product binding.
     
     Mathematical approaches to combine role and filler vectors:
-    - OUTER_PRODUCT: Standard tensor product (role ⊗ filler) 
-    - CIRCULAR_CONVOLUTION: Circular convolution binding (memory efficient)
-    - ADDITION: Simple vector addition (least structured)
-    - MULTIPLICATION: Element-wise multiplication (component binding)
-    - HOLOGRAPHIC_REDUCED: HRR-style reduced representation
+    
+    🎯 SMOLENSKY (1990) RESEARCH-ACCURATE IMPLEMENTATIONS:
+    - KRONECKER_PRODUCT: True tensor product preserving algebraic structure ✅
+    - TENSOR_PRODUCT_PROPER: Full tensor algebra with rank preservation ✅
+    - MATRIX_PRODUCT: 2D tensor structure for proper unbinding ✅
+    - SMOLENSKY_TPR: Original Smolensky Tensor Product Representation ✅
+    
+    🧠 NEURAL IMPLEMENTATIONS:
+    - NEURAL_BINDING: Learning-based binding with neural networks ✅
+    - DISTRIBUTED_BINDING: Micro-feature distributed representations ✅
+    - PRODUCT_UNITS: Neural product units (role_i × filler_j) ✅
+    
+    ⚡ OPTIMIZED IMPLEMENTATIONS:
+    - OUTER_PRODUCT: Standard outer product (role ⊗ filler) [legacy]
+    - CIRCULAR_CONVOLUTION: FFT-based circular convolution ✅
+    - HOLOGRAPHIC_REDUCED: HRR-style compressed representations ✅
+    - ADDITION: Simple superposition (least structured)
     """
-    OUTER_PRODUCT = "outer_product"
-    CIRCULAR_CONVOLUTION = "circular_convolution"
-    ADDITION = "addition" 
-    MULTIPLICATION = "multiplication"
-    TENSOR_PRODUCT = "tensor_product"  # Legacy alias for OUTER_PRODUCT
-    HOLOGRAPHIC_REDUCED = "holographic_reduced"
+    # Research-accurate Smolensky (1990) implementations
+    KRONECKER_PRODUCT = "kronecker_product"        # True tensor product
+    TENSOR_PRODUCT_PROPER = "tensor_product_proper" # Full tensor algebra 
+    MATRIX_PRODUCT = "matrix_product"              # 2D preservation
+    SMOLENSKY_TPR = "smolensky_tpr"               # Original TPR
+    
+    # Neural implementations 
+    NEURAL_BINDING = "neural_binding"             # Learning-based
+    DISTRIBUTED_BINDING = "distributed_binding"   # Micro-features
+    PRODUCT_UNITS = "product_units"              # Neural units
+    
+    # Optimized implementations
+    OUTER_PRODUCT = "outer_product"              # Legacy default
+    CIRCULAR_CONVOLUTION = "circular_convolution" # FFT-based
+    HOLOGRAPHIC_REDUCED = "holographic_reduced"  # HRR-style
+    ADDITION = "addition"                        # Simple superposition
+    
+    # Additional methods
+    MULTIPLICATION = "multiplication"            # Element-wise
+    TENSOR_PRODUCT = "tensor_product"           # Legacy alias
     VECTOR_MATRIX_MULTIPLICATION = "vector_matrix_multiplication"
 
 

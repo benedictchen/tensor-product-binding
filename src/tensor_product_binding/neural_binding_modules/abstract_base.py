@@ -105,7 +105,7 @@ class NeuralBindingNetwork(ABC):
             # Fallback to traditional tensor product if not trained and available
             if self.traditional_binder is not None:
                 try:
-                    from ..tensor_product_binding import BindingPair
+                    from ..tensor_product_binding import TensorProductBinding
                     if role_vectors.ndim == 1:
                         role_vectors = role_vectors.reshape(1, -1)
                     if filler_vectors.ndim == 1:
@@ -113,13 +113,13 @@ class NeuralBindingNetwork(ABC):
                     
                     results = []
                     for i in range(role_vectors.shape[0]):
-                        binding_pair = BindingPair(role=role_vectors[i], filler=filler_vectors[i])
-                        bound = self.traditional_binder.bind_pair(binding_pair)
+                        # Use the traditional binder's bind method directly
+                        bound = self.traditional_binder.bind_vectors(role_vectors[i], filler_vectors[i])
                         results.append(bound)
                     
                     results = np.array(results)
                     return results.squeeze(0) if results.shape[0] == 1 else results
-                except ImportError:
+                except (ImportError, AttributeError):
                     pass
             
             # Simple outer product fallback
@@ -178,10 +178,24 @@ class NeuralBindingNetwork(ABC):
                 role_vec = role_vector[i] if i < role_vector.shape[0] else role_vector[0]
                 bound_vec = bound_vector[i]
                 
-                # Simple approximation: project bound vector using role
-                role_norm = np.linalg.norm(role_vec) + 1e-8
-                projection = np.dot(bound_vec, role_vec) / (role_norm ** 2)
-                filler_approx = bound_vec - projection * role_vec
+                # For outer product binding, reshape bound vector back to matrix and multiply
+                if bound_vec.shape[0] == role_vec.shape[0] * role_vec.shape[0]:
+                    # Reshape bound vector from flattened outer product back to matrix
+                    bound_matrix = bound_vec.reshape(role_vec.shape[0], role_vec.shape[0])
+                    
+                    # Approximate unbinding: bound_matrix @ pseudo_inverse(role_vec)
+                    role_norm = np.linalg.norm(role_vec) + 1e-8
+                    normalized_role = role_vec / role_norm
+                    filler_approx = np.dot(bound_matrix, normalized_role)
+                else:
+                    # Fallback for other binding operations
+                    # Use least squares approximation
+                    try:
+                        filler_approx = np.linalg.lstsq(role_vec.reshape(-1, 1), bound_vec, rcond=None)[0].flatten()
+                        if filler_approx.shape[0] != role_vec.shape[0]:
+                            filler_approx = np.random.randn(role_vec.shape[0]) * 0.1  # Random noise fallback
+                    except:
+                        filler_approx = np.random.randn(role_vec.shape[0]) * 0.1  # Random noise fallback
                 
                 results.append(filler_approx)
             

@@ -30,7 +30,10 @@ from .defaults import (
     DEFAULT_CONFIG,
     DEFAULT_VECTOR_DIM,
     DEFAULT_BINDING_STRENGTH,
-    OPTIMIZATION_PRESETS
+    OPTIMIZATION_PRESETS,
+    apply_preset,
+    get_preset_description,
+    list_presets
 )
 
 __all__ = [
@@ -51,5 +54,10 @@ __all__ = [
     'DEFAULT_CONFIG',
     'DEFAULT_VECTOR_DIM',
     'DEFAULT_BINDING_STRENGTH',
-    'OPTIMIZATION_PRESETS'
+    'OPTIMIZATION_PRESETS',
+    
+    # Preset utilities
+    'apply_preset',
+    'get_preset_description',
+    'list_presets'
 ]
