@@ -5,7 +5,6 @@
 Modular architecture for neural tensor product binding networks,
 split from monolithic neural_binding.py (1207 lines → 4 modules).
 
-Part of tensor_product_binding package 800-line compliance initiative.
 
 Author: Benedict Chen (benedict@benedictchen.com)
 Based on: Smolensky (1990) "Tensor Product Variable Binding and the Representation of Symbolic Structures"

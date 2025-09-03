@@ -4,7 +4,7 @@
 🙏 If this library helps your research or project, please consider donating:
 💳 https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
 
-Your support makes advanced AI research accessible to everyone! 🚀
+Your support makes advanced AI research accessible to everyone!
 """
 """
 Tensor Product Binding Tests
@@ -12,7 +12,7 @@ Tensor Product Binding Tests
 
 
 """
-🧠 Thank you for using this research software! 🧠
+Thank you for using this research software!
 
 📚 If this work contributed to your research, please:
 💰 DONATE: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS

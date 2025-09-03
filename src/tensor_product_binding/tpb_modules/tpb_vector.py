@@ -2,9 +2,6 @@
 🎯 Tensor Product Binding - Vector Representation Classes
 ========================================================
 
-Split from tensor_product_binding.py (1103 lines → modular architecture)
-Part of tensor_product_binding package 800-line compliance initiative.
-
 Author: Benedict Chen (benedict@benedictchen.com)
 
 💰 Donations: Help support this research!
