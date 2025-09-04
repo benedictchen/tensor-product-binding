@@ -203,12 +203,30 @@ class VectorSpace:
         return symbolic_vector
     
     def _generate_vector(self, name: str) -> np.ndarray:
-        """Generate a random vector for the space"""
-        # Use name as seed for reproducible vectors
-        np.random.seed(hash(name) % 2**32)
-        vector = np.random.randn(self.dimension)
+        """Generate a content-based vector from name (no fake hash features)"""
+        # Content-based vector generation following VSA principles
+        name_bytes = name.encode('utf-8')
+        
+        # Create deterministic vector from character values
+        vector = np.zeros(self.dimension)
+        for i, byte_val in enumerate(name_bytes):
+            # Distribute character information across vector dimensions
+            idx = i % self.dimension
+            vector[idx] += (byte_val / 255.0) * np.cos(i * 0.1)
+            
+        # Add character positional encoding
+        for i in range(len(name)):
+            pos_idx = (i * 11) % self.dimension  # Prime spacing
+            vector[pos_idx] += np.sin(i * 0.2) * 0.1
+            
+        # Add randomization based on content (not hash)
+        content_seed = sum(ord(c) * (i + 1) for i, c in enumerate(name)) % 2**32
+        np.random.seed(content_seed)
+        noise = np.random.randn(self.dimension) * 0.01  # Small noise
+        vector += noise
         np.random.seed()  # Reset seed
-        return vector
+        
+        return vector / np.linalg.norm(vector)  # Normalize
     
     def _orthogonalize_vector(self, vector: np.ndarray, name: str) -> np.ndarray:
         """Orthogonalize vector against existing vectors in space"""

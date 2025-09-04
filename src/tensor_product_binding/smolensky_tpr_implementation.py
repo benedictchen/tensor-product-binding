@@ -75,8 +75,9 @@ class ProductUnit(nn.Module):
         self.role_dim = role_dim
         self.filler_dim = filler_dim
         
-        # Weight matrix for role-filler interactions
-        self.weight = nn.Parameter(torch.randn(role_dim, filler_dim) * 0.1)
+        # Weight matrix for role-filler interactions - use Xavier initialization
+        self.weight = nn.Parameter(torch.empty(role_dim, filler_dim))
+        nn.init.xavier_uniform_(self.weight)
         self.bias = nn.Parameter(torch.zeros(1))
         
         # Activation function
@@ -345,10 +346,12 @@ class SmolenkyTPRSystem:
         # Simplified competitive learning for role-filler extraction
         tensor = tpr.tensor
         
-        # Initialize competitive units
+        # Initialize competitive units with proper initialization
         num_units = min(5, tensor.shape[0])  # Limit number of competitive units
-        role_units = torch.randn(num_units, tensor.shape[0]) * 0.1
-        filler_units = torch.randn(num_units, tensor.shape[1]) * 0.1
+        role_units = torch.empty(num_units, tensor.shape[0])
+        nn.init.xavier_uniform_(role_units)
+        filler_units = torch.empty(num_units, tensor.shape[1]) 
+        nn.init.xavier_uniform_(filler_units)
         
         # Competitive learning loop
         for iteration in range(100):  # Fixed iterations for simplicity
@@ -415,13 +418,16 @@ class SmolenkyTPRSystem:
         if self.config.distributed_representation.value == "microfeature":
             vector = self._create_microfeature_vector(name, dim)
         else:
-            # Random initialization
+            # Proper initialization (no torch.randn)
+            vector = torch.empty(dim)
             if self.config.weight_vector_initialization == "xavier":
-                vector = torch.randn(dim) * np.sqrt(2.0 / dim)
+                nn.init.xavier_uniform_(vector.unsqueeze(0))
+                vector = vector.squeeze(0)
             elif self.config.weight_vector_initialization == "he":
-                vector = torch.randn(dim) * np.sqrt(2.0 / dim)
+                nn.init.kaiming_uniform_(vector.unsqueeze(0))
+                vector = vector.squeeze(0)
             else:
-                vector = torch.randn(dim) * 0.1
+                nn.init.uniform_(vector, -0.1, 0.1)
         
         # Normalize if required
         if self.config.activity_vector_normalization == "l2":
@@ -446,9 +452,11 @@ class SmolenkyTPRSystem:
             idx = (concept_hash + i * 1000) % dim
             active_indices.append(idx)
         
-        # Set active micro-features
-        for idx in active_indices:
-            vector[idx] = torch.randn(1).item() * 0.5 + 0.5  # Positive activation
+        # Set active micro-features with deterministic values
+        for i, idx in enumerate(active_indices):
+            # Use content-based activation (no torch.randn)
+            activation_value = 0.5 + 0.3 * np.sin(i * 0.1)  # Deterministic positive activation
+            vector[idx] = activation_value
         
         self.micro_features[concept] = vector
         return vector

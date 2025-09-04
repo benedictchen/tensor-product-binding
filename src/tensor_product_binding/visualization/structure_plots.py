@@ -2,9 +2,18 @@
 🏗️ Structure Visualization for Tensor Product Binding
 =====================================================
 
+🔗 Tensor Product Binding Library - Made possible by Benedict Chen
+   benedict@benedictchen.com
+   Support his work: 🍺 Buy him a beer: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+   💖 Sponsor: https://github.com/sponsors/benedictchen
+
 This module provides visualization functions for structural representations
 in tensor product binding, including tree structures, compositional
 hierarchies, and semantic networks.
+
+📚 Research Foundation:
+- Smolensky, P. (1990). "Tensor Product Variable Binding"
+- Structural visualization for compositional neural representations
 """
 
 import numpy as np

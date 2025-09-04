@@ -221,7 +221,9 @@ class TensorProductBinding:
                 filler_vec = filler.data
             else:
                 filler_vec = filler
-            filler_name = f"vector_{hash(filler_vec.tobytes())}"
+            # Use content-based naming instead of hash
+            filler_stats = f"{np.mean(filler_vec):.3f}_{np.std(filler_vec):.3f}_{filler_vec.shape[0]}"
+            filler_name = f"filler_{filler_stats}"
             
         # Get or create role vector (second parameter)
         if isinstance(role, str):
@@ -232,7 +234,9 @@ class TensorProductBinding:
                 role_vec = role.data
             else:
                 role_vec = role
-            role_name = f"vector_{hash(role_vec.tobytes())}"
+            # Use content-based naming instead of hash
+            role_stats = f"{np.mean(role_vec):.3f}_{np.std(role_vec):.3f}_{role_vec.shape[0]}"
+            role_name = f"role_{role_stats}"
         
         # Delegate to core binding engine
         return self.core_binding.bind(

@@ -522,17 +522,17 @@ class SymbolicStructureEncoder:
     
     def _extract_semantic_roles(self, words: List[str]) -> Dict[str, str]:
         """
-        Extract semantic roles from word sequence
-        Based on simple heuristic role assignment for demonstration
-        Research-accurate implementation would use proper semantic parser
+        Extract role-filler bindings per Smolensky (1990) TPR framework.
+        
+        TPR uses structural positions as roles, not complex semantic parsing.
+        Formula: S = Σ ri ⊗ fi where ri = role vector, fi = filler vector
         """
         roles = {}
         
-        # Simple semantic role extraction (agent, action, patient pattern)
-        if len(words) >= 2:
-            roles["agent"] = words[0] if words else "unknown"
-            roles["action"] = words[1] if len(words) > 1 else "unknown"
-            roles["patient"] = words[2] if len(words) > 2 else "unknown"
+        # TPR structural roles - positions in sequence (Smolensky 1990, Section 3.1)
+        role_names = ["subject", "predicate", "object", "modifier"]
+        for i, word in enumerate(words[:len(role_names)]):
+            roles[role_names[i]] = word
         
         return roles
     

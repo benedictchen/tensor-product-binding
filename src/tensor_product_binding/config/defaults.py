@@ -9,7 +9,7 @@ best practices and typical use cases.
 Usage:
     from tensor_product_binding.config import DEFAULT_CONFIG, OPTIMIZATION_PRESETS
     config = DEFAULT_CONFIG.copy()  # Start with defaults
-    config.vector_dim = 200         # Customize as needed
+    config.vector_dim = 200         # Adjust dimension for specific application
 """
 
 from typing import Dict, Any
