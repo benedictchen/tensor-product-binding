@@ -1,10 +1,8 @@
 """
-🧪 Tensor Product Binding - Functionality Preservation Test
-=========================================================
+🧪 Tensor Product Binding - Compatibility Test
+===============================================
 
-This test ensures that ALL existing functionality is preserved while
-adding new neural implementations. Tests both backward compatibility
-and new functionality.
+Tests backward compatibility and new functionality for TPR implementations.
 
 Author: Benedict Chen (benedict@benedictchen.com)
 """

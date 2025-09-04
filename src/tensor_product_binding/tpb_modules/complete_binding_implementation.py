@@ -73,7 +73,7 @@ class CompleteTensorProductBinder:
             
     def bind(self, role_vectors: np.ndarray, filler_vectors: np.ndarray) -> np.ndarray:
         """
-        COMPLETE IMPLEMENTATION: All binding solutions with configuration support
+        Complete implementation: All binding solutions with configuration support
         
         This method implements all research solutions from code comments:
         - Solution 1: Basic Outer Product (Smolensky 1990)
@@ -401,7 +401,7 @@ class CompleteTensorProductBinder:
     
     def unbind(self, bound_vector: np.ndarray, role_vector: np.ndarray) -> np.ndarray:
         """
-        COMPLETE IMPLEMENTATION: All unbinding solutions with configuration support
+        Complete implementation: All unbinding solutions with configuration support
         
         This method implements all research solutions from code comments:
         - Solution 1: Approximate Inverse (Basic)
@@ -671,10 +671,52 @@ class CompleteTensorProductBinder:
         return recovered.squeeze(0) if batch_size == 1 else recovered
     
     def _compute_unbinding_gradient(self, error: np.ndarray, role: np.ndarray, filler: np.ndarray) -> np.ndarray:
-        """Compute gradient for iterative unbinding (simplified implementation)"""
-        # Simplified gradient computation
-        # Full implementation would depend on specific binding method
-        return np.random.randn(*filler.shape) * 0.01  # Placeholder
+        """Compute gradient for iterative unbinding using circular convolution properties."""
+        # Based on Smolensky (1990) tensor product binding gradients
+        # For circular convolution binding: gradient = conv(error, inverse(role))
+        
+        if self.config.binding_method == "circular_convolution":
+            # Compute role inverse using FFT properties
+            role_fft = np.fft.fft(role, axis=-1)
+            role_inv_fft = np.conj(role_fft) / (np.abs(role_fft)**2 + 1e-10)  # Regularized inverse
+            role_inv = np.real(np.fft.ifft(role_inv_fft, axis=-1))
+            
+            # Gradient via convolution
+            gradient = self._circular_convolution(error, role_inv)
+            
+        elif self.config.binding_method == "element_wise":
+            # For element-wise binding: gradient = error * role
+            gradient = error * role
+            
+        elif self.config.binding_method == "fourier_domain":
+            # FFT-based gradient computation
+            error_fft = np.fft.fft(error, axis=-1)
+            role_fft = np.fft.fft(role, axis=-1)
+            # Gradient in frequency domain
+            grad_fft = error_fft * np.conj(role_fft) / (np.abs(role_fft)**2 + 1e-10)
+            gradient = np.real(np.fft.ifft(grad_fft, axis=-1))
+            
+        else:
+            # Fallback: finite difference approximation
+            eps = 1e-5
+            gradient = np.zeros_like(filler)
+            
+            for i in range(filler.size):
+                # Perturb filler slightly
+                filler_plus = filler.copy()
+                filler_plus.flat[i] += eps
+                
+                filler_minus = filler.copy() 
+                filler_minus.flat[i] -= eps
+                
+                # Compute binding for perturbed inputs
+                bound_plus = self._bind_vectors(role, filler_plus)
+                bound_minus = self._bind_vectors(role, filler_minus)
+                
+                # Finite difference gradient
+                gradient.flat[i] = np.sum(error * (bound_plus - bound_minus)) / (2 * eps)
+        
+        return gradient
     
     def _prepare_inputs(self, role_vectors: np.ndarray, filler_vectors: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         """Prepare and validate inputs for binding operations"""

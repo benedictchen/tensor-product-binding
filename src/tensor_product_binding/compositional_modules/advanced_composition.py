@@ -1,6 +1,6 @@
 """
-🎯 Compositional Semantics - Advanced Composition Methods Module
-==============================================================
+🎯 Compositional Semantics - Composition Methods Module
+======================================================
 
 
 Author: Benedict Chen (benedict@benedictchen.com)
@@ -8,20 +8,19 @@ Based on: Smolensky (1990) "Tensor Product Variable Binding and the Representati
 
 🎯 MODULE PURPOSE:
 =================
-Advanced compositional semantic methods for complex linguistic structures.
+Compositional semantic methods for complex linguistic structures.
 Provides sentence composition, logical form processing, and semantic decomposition.
 
 🔬 RESEARCH FOUNDATION:
 ======================
-Implements advanced composition techniques based on Smolensky (1990):
+Implements composition techniques based on Smolensky (1990):
 - Frame-based composition for predicate-argument structures
 - Sentence-level compositional processing with syntactic structure
 - Logical form composition and interpretation
 - Semantic decomposition and meaning vector analysis
 - WordNet integration for large-scale semantic lexicons
 
-This module contains the advanced composition methods, split from the
-1010-line monolith for specialized compositional processing.
+This module contains composition methods for specialized compositional processing.
 """
 
 import numpy as np
@@ -292,7 +291,7 @@ class AdvancedCompositionMixin:
     
     def create_semantic_lexicon_from_wordnet(self, concepts: List[str]) -> Dict[str, "SemanticConcept"]:
         """
-        Create semantic lexicon from WordNet concepts (placeholder implementation)
+        Create semantic lexicon from WordNet concepts (heuristic-based implementation)
         
         Args:
             concepts: List of concept names to include

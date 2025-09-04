@@ -37,7 +37,7 @@ from .core.binding_operations import TPBVector
 
 class ComprehensiveBindingImplementations:
     """
-    🎯 Complete implementation of all FIXME solutions for tensor product binding.
+    🎯 Complete implementation of all research solutions for tensor product binding.
     
     Provides multiple research-accurate implementations with user-configurable options.
     All methods preserve the theoretical foundations from Smolensky (1990).
@@ -74,7 +74,7 @@ class ComprehensiveBindingImplementations:
              binding_strength: float = 1.0,
              **kwargs) -> TPBVector:
         """
-        🔗 Master binding method with all FIXME solutions implemented.
+        🔗 Master binding method implementing Smolensky (1990) tensor product representations.
         
         Provides multiple research-accurate implementations configurable by user.
         
@@ -709,5 +709,5 @@ class ComprehensiveBindingImplementations:
         )
 
 
-# Export the comprehensive implementation
+# Export Smolensky (1990) tensor product binding implementation
 __all__ = ['ComprehensiveBindingImplementations']

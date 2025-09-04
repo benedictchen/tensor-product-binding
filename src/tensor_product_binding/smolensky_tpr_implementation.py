@@ -1,11 +1,10 @@
 """
-Smolensky (1990) Research-Accurate TPR Implementation
+Smolensky (1990) TPR Implementation
 ===================================================
 
 Author: Benedict Chen (benedict@benedictchen.com)
 
-Research-accurate implementation of Smolensky's Tensor Product Variable Binding
-framework addressing all critical FIXME issues identified in code review.
+Implementation of Smolensky's Tensor Product Variable Binding framework.
 
 Based on: Smolensky, P. (1990). Tensor product variable binding and the 
          representation of symbolic structures in connectionist systems.

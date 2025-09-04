@@ -4,7 +4,7 @@ Tensor Product Binding Comprehensive Configuration System
 
 Author: Benedict Chen (benedict@benedictchen.com)
 
-Configuration system for ALL TPR FIXME solutions identified in the comprehensive
+Configuration system for ALL TPR research solutions identified in the comprehensive
 code review, allowing users to select from multiple research-accurate approaches.
 
 Based on: Smolensky (1990) "Tensor Product Variable Binding and the 
@@ -68,7 +68,7 @@ class LearningMechanism(Enum):
 @dataclass
 class TPRComprehensiveConfig:
     """
-    MASTER CONFIGURATION for ALL TPR FIXME solutions.
+    MASTER CONFIGURATION for ALL TPR research solutions.
     
     Comprehensive configuration covering all aspects of Smolensky's TPR
     framework with multiple implementation approaches.

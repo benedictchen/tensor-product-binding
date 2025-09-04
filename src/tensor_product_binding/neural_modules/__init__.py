@@ -15,7 +15,7 @@ from .utilities import (
     evaluate_neural_binding
 )
 
-# NEW: Complete neural implementations - ALL SOLUTIONS FROM FIXME COMMENTS
+# Neural implementations from Smolensky (1990)
 from .complete_neural_implementations import (
     NeuralBindingConfig,
     CompleteTensorProductBinder,

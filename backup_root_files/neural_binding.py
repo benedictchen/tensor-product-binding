@@ -333,9 +333,9 @@ class NeuralBindingNetwork(ABC):
         return {
             'loss': losses[-1] if losses else 0.0,
             'epochs': n_epochs,
-            'binding_accuracy': 0.85,  # Placeholder
-            'unbinding_accuracy': 0.80,  # Placeholder
-            'convergence': True,
+            'binding_accuracy': self._calculate_binding_accuracy(training_data),
+            'unbinding_accuracy': self._calculate_unbinding_accuracy(training_data),
+            'convergence': losses[-1] < 0.01 if losses else False,
             'training_history': losses
         }
     
@@ -376,6 +376,56 @@ class NeuralBindingNetwork(ABC):
             print("Warning: Network not trained. Using traditional tensor product binding.")
         
         return self.bind(role_vectors, filler_vectors)
+    
+    def _calculate_binding_accuracy(self, training_data: List[Tuple[np.ndarray, np.ndarray, np.ndarray]]) -> float:
+        """Calculate binding accuracy on training data using cosine similarity (Smolensky 1990)"""
+        if not training_data:
+            return 0.0
+            
+        total_similarity = 0.0
+        n_samples = len(training_data)
+        
+        for role_vec, filler_vec, target_bound in training_data:
+            predicted_bound = self.bind(role_vec, filler_vec)
+            
+            # Cosine similarity between predicted and target
+            dot_product = np.dot(predicted_bound.flatten(), target_bound.flatten())
+            pred_norm = np.linalg.norm(predicted_bound)
+            target_norm = np.linalg.norm(target_bound)
+            
+            if pred_norm > 0 and target_norm > 0:
+                similarity = dot_product / (pred_norm * target_norm)
+                total_similarity += max(0, similarity)  # Clamp negative similarities to 0
+        
+        return total_similarity / n_samples if n_samples > 0 else 0.0
+    
+    def _calculate_unbinding_accuracy(self, training_data: List[Tuple[np.ndarray, np.ndarray, np.ndarray]]) -> float:
+        """Calculate unbinding accuracy by testing round-trip binding->unbinding"""
+        if not training_data:
+            return 0.0
+            
+        total_similarity = 0.0
+        n_samples = len(training_data)
+        
+        for role_vec, filler_vec, target_bound in training_data:
+            try:
+                # Create binding then attempt unbinding
+                bound_vec = self.bind(role_vec, filler_vec)
+                unbound_filler = self.unbind(bound_vec, role_vec)
+                
+                # Compare unbound result to original filler
+                dot_product = np.dot(unbound_filler.flatten(), filler_vec.flatten())
+                unbound_norm = np.linalg.norm(unbound_filler)
+                filler_norm = np.linalg.norm(filler_vec)
+                
+                if unbound_norm > 0 and filler_norm > 0:
+                    similarity = dot_product / (unbound_norm * filler_norm)
+                    total_similarity += max(0, similarity)
+            except (NotImplementedError, Exception):
+                # Unbinding not implemented or failed - return 0 for this sample
+                pass
+        
+        return total_similarity / n_samples if n_samples > 0 else 0.0
 
 class PyTorchBindingNetwork(NeuralBindingNetwork):
     """

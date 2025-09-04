@@ -176,11 +176,46 @@ class PyTorchBindingNetwork(NeuralBindingNetwork):
             return unbound.cpu().numpy()
     
     def evaluate(self, test_data: Dict[str, Any]) -> Dict[str, float]:
-        """Evaluate network performance"""
+        """Evaluate network performance on test data"""
         self.role_encoder.eval()
         self.filler_encoder.eval()
         self.binding_network.eval()
         self.unbinding_network.eval()
         
-        # Simplified evaluation
-        return {"accuracy": 0.85, "loss": 0.12}
+        if not test_data or 'inputs' not in test_data or 'targets' not in test_data:
+            return {"accuracy": 0.0, "loss": float('inf')}
+        
+        total_loss = 0.0
+        correct_predictions = 0
+        total_samples = 0
+        
+        with torch.no_grad():
+            for batch_idx, (role_batch, filler_batch, target_batch) in enumerate(
+                zip(test_data['inputs']['roles'], test_data['inputs']['fillers'], test_data['targets'])
+            ):
+                # Convert to tensors
+                role_tensor = torch.FloatTensor(role_batch).to(self.device)
+                filler_tensor = torch.FloatTensor(filler_batch).to(self.device)
+                target_tensor = torch.FloatTensor(target_batch).to(self.device)
+                
+                # Forward pass
+                predicted = self.bind(role_batch, filler_batch)
+                predicted_tensor = torch.FloatTensor(predicted).to(self.device)
+                
+                # Compute loss
+                batch_loss = torch.nn.functional.mse_loss(predicted_tensor, target_tensor)
+                total_loss += batch_loss.item()
+                
+                # Compute accuracy using cosine similarity
+                cos_sim = torch.nn.functional.cosine_similarity(
+                    predicted_tensor.view(predicted_tensor.shape[0], -1),
+                    target_tensor.view(target_tensor.shape[0], -1),
+                    dim=1
+                )
+                correct_predictions += (cos_sim > 0.8).sum().item()
+                total_samples += role_batch.shape[0] if hasattr(role_batch, 'shape') else len(role_batch)
+        
+        accuracy = correct_predictions / max(total_samples, 1)
+        avg_loss = total_loss / max(len(test_data.get('inputs', {}).get('roles', [])), 1)
+        
+        return {"accuracy": accuracy, "loss": avg_loss}

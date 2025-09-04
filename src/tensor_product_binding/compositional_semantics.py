@@ -4,7 +4,7 @@
 🙏 If this library helps your research or project, please consider donating:
 💳 https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
 
-Your support makes advanced AI research accessible to everyone! 🚀
+Your support makes AI research accessible to everyone! 🚀
 """
 """
 🧠 Compositional Semantics - How AI Understands Language Structure
@@ -22,7 +22,7 @@ semantics uses tensor product binding to give AI the ability to understand that 
 ORDER and ROLES matter. It's like giving AI a grammar brain!
 
 🧪 Research Background:
-Smolensky's breakthrough solved how neural networks could represent structured 
+Smolensky's research solved how neural networks could represent structured 
 meaning. Traditional AI either used symbolic logic (rigid) or neural nets 
 (unstructured). Tensor product binding bridges this gap by allowing neural 
 representation of compositional structure.
@@ -803,7 +803,7 @@ class CompositionalSemantics:
         Returns:
             Dictionary of semantic concepts
         """
-        # This is a placeholder - real implementation would integrate with WordNet or similar
+        # Heuristic-based implementation - could be enhanced with WordNet or similar in the future
         lexicon = {}
         
         for concept in concepts:

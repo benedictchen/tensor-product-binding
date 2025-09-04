@@ -4,8 +4,8 @@ Comprehensive Tests for TPR FIXME Solutions
 
 Author: Benedict Chen (benedict@benedictchen.com)
 
-Validation tests for all implemented TPR FIXME solutions:
-- Smolensky (1990) research-accurate implementation
+Validation tests for all implemented TPR research solutions:
+- Smolensky (1990) implementation
 - Neural binding with product units
 - Systematicity and compositionality validation
 - Distributed representation with micro-features
@@ -33,7 +33,7 @@ from tensor_product_binding.tpr_comprehensive_config import (
     validate_tpr_config
 )
 
-from tensor_product_binding.smolensky_research_accurate import (
+from tensor_product_binding.smolensky_tpr_implementation import (
     SmolenkyTPRSystem,
     TensorProductRepresentation,
     ProductUnit,

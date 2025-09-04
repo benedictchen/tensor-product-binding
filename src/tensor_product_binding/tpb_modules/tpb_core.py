@@ -347,7 +347,7 @@ class TensorProductBinding:
         >>> retrieved_filler = tpb.unbind(bound, agent)
         >>> similarity = tpb.similarity(retrieved_filler, john)
         """
-        # ✅ COMPREHENSIVE UNBINDING: Use comprehensive implementation if available
+        # ✅ UNBINDING: Use tensor product unbinding implementation if available
         if hasattr(self, '_binding_impl'):
             try:
                 return self._binding_impl.unbind(bound_vector, probe_vector, operation)

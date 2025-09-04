@@ -493,11 +493,62 @@ class SymbolicStructureEncoder:
                 return self._encode_sequence(words)
                 
         elif structure_type == "semantic":
-            # Semantic role labeling (placeholder)
-            return self._encode_sequence(words)
+            # Semantic role labeling based on Smolensky (1990) tensor product representations
+            # Implements proper role-filler binding for compositional semantics
+            
+            # Research Foundation: Smolensky (1990) - "Tensor Product Variable Binding"
+            # Uses tensor product binding: role ⊗ filler for compositional representation
+            
+            semantic_roles = self._extract_semantic_roles(words)
+            bound_representation = np.zeros(self.role_dimension * self.filler_dimension)
+            
+            for role, filler in semantic_roles.items():
+                # Create role vector (semantic function)
+                role_vector = self._create_role_vector(role)
+                
+                # Create filler vector (semantic argument)
+                filler_vector = self._create_filler_vector(filler)
+                
+                # Tensor product binding (Smolensky's core operation)
+                bound_pair = np.outer(role_vector, filler_vector).flatten()
+                
+                # Superposition of all role-filler bindings
+                bound_representation += bound_pair
+                
+            return bound_representation
             
         else:
             return self._encode_sequence(words)
+    
+    def _extract_semantic_roles(self, words: List[str]) -> Dict[str, str]:
+        """
+        Extract semantic roles from word sequence
+        Based on simple heuristic role assignment for demonstration
+        Research-accurate implementation would use proper semantic parser
+        """
+        roles = {}
+        
+        # Simple semantic role extraction (agent, action, patient pattern)
+        if len(words) >= 2:
+            roles["agent"] = words[0] if words else "unknown"
+            roles["action"] = words[1] if len(words) > 1 else "unknown"
+            roles["patient"] = words[2] if len(words) > 2 else "unknown"
+        
+        return roles
+    
+    def _create_role_vector(self, role: str) -> np.ndarray:
+        """Create distributed vector for semantic role"""
+        # Use hash-based vector generation for consistency
+        hash_val = hash(role) % (2**31 - 1)  # Ensure positive
+        np.random.seed(hash_val)
+        return np.random.randn(self.role_dimension)
+    
+    def _create_filler_vector(self, filler: str) -> np.ndarray:
+        """Create distributed vector for role filler"""
+        # Use hash-based vector generation for consistency  
+        hash_val = hash(filler) % (2**31 - 1)  # Ensure positive
+        np.random.seed(hash_val)
+        return np.random.randn(self.filler_dimension)
     
     def encode_tree(self, tree_dict: Dict[str, Any]) -> np.ndarray:
         """
