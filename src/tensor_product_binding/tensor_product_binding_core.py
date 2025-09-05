@@ -1,4 +1,37 @@
 """
+🧠 Tensor Product Binding Core
+===============================
+
+🔬 Research Foundation:
+======================
+Based on tensor product representation theory:
+- Smolensky, P. (1990). "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+- Plate, T.A. (1995). "Holographic Reduced Representations"
+- Gayler, R.W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience"
+🎯 ELI5 Summary:
+This is the brain of our operation! Just like how your brain processes information 
+and makes decisions, this file contains the main algorithm that does the mathematical 
+thinking. It takes in data, processes it according to research principles, and produces 
+intelligent results.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+🧠 Core Algorithm Architecture:
+===============================
+    Input → Processing → Output
+      ↓         ↓         ↓
+  [Data]  [Algorithm]  [Result]
+      ↓         ↓         ↓
+     📊        ⚙️        ✨
+     
+Mathematical Foundation → Implementation → Research Application
+
+"""
+"""
 Modular Tensor Product Binding Core
 
 This module provides the main TensorProductBinding class that integrates
@@ -28,7 +61,7 @@ from .config_enums import (
     BindingOperation, BindingMethod, UnbindingMethod, 
     TensorBindingConfig, BindingPair
 )
-from .vector_operations import TPBVector, create_normalized_vector
+from .vector_operations import TPRVector, create_normalized_vector
 from .core_binding import CoreBinding
 
 
@@ -159,17 +192,17 @@ class TensorProductBinding:
         self.create_role_vector(role_name)
         return role_name
     
-    def get_symbol_vector(self, symbol_name: str) -> TPBVector:
-        """Get symbol vector as TPBVector for compatibility with tests"""
+    def get_symbol_vector(self, symbol_name: str) -> TPRVector:
+        """Get symbol vector as TPRVector for compatibility with tests"""
         if symbol_name not in self.filler_vectors:
             raise ValueError(f"Symbol {symbol_name} not found")
-        return TPBVector(self.filler_vectors[symbol_name])
+        return TPRVector(self.filler_vectors[symbol_name])
     
-    def get_role_vector(self, role_name: str) -> TPBVector:
-        """Get role vector as TPBVector for compatibility with tests"""
+    def get_role_vector(self, role_name: str) -> TPRVector:
+        """Get role vector as TPRVector for compatibility with tests"""
         if role_name not in self.role_vectors:
             raise ValueError(f"Role {role_name} not found")
-        return TPBVector(self.role_vectors[role_name])
+        return TPRVector(self.role_vectors[role_name])
     
     def get_vector(self, name: str) -> np.ndarray:
         """Get vector by name (check both roles and fillers)"""
@@ -183,7 +216,7 @@ class TensorProductBinding:
         
     def bind(self, filler: Union[str, np.ndarray], role: Union[str, np.ndarray], 
              binding_strength: Optional[float] = None, context: Optional[List[str]] = None,
-             hierarchical_level: int = 0, operation: Optional[BindingOperation] = None) -> TPBVector:
+             hierarchical_level: int = 0, operation: Optional[BindingOperation] = None) -> TPRVector:
         """
         Create Tensor Product Binding Between Role and Filler (The TPR Magic!)
         
@@ -199,7 +232,7 @@ class TensorProductBinding:
             operation: Binding operation type (for compatibility)
             
         Returns:
-            TPBVector: Tensor product binding
+            TPRVector: Tensor product binding
         """
         
         # Set binding strength
@@ -208,16 +241,16 @@ class TensorProductBinding:
         
         # Get or create filler vector (first parameter)
         if isinstance(filler, str):
-            # Check if it's already a TPBVector in the dictionary
-            if filler in self.filler_vectors and isinstance(self.filler_vectors[filler], TPBVector):
+            # Check if it's already a TPRVector in the dictionary
+            if filler in self.filler_vectors and isinstance(self.filler_vectors[filler], TPRVector):
                 filler_vec = self.filler_vectors[filler].data
-            elif filler in self.symbol_vectors and isinstance(self.symbol_vectors[filler], TPBVector):
+            elif filler in self.symbol_vectors and isinstance(self.symbol_vectors[filler], TPRVector):
                 filler_vec = self.symbol_vectors[filler].data
             else:
                 filler_vec = self.create_filler_vector(filler)
             filler_name = filler
         else:
-            if hasattr(filler, 'data'):  # It's a TPBVector
+            if hasattr(filler, 'data'):  # It's a TPRVector
                 filler_vec = filler.data
             else:
                 filler_vec = filler
@@ -228,7 +261,7 @@ class TensorProductBinding:
             role_vec = self.create_role_vector(role)
             role_name = role
         else:
-            if hasattr(role, 'data'):  # It's a TPBVector
+            if hasattr(role, 'data'):  # It's a TPRVector
                 role_vec = role.data
             else:
                 role_vec = role

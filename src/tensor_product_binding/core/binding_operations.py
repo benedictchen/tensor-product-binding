@@ -1,18 +1,80 @@
 """
-🔗 Core Tensor Product Binding Operations
-=========================================
+🔗 Tensor Product Binding - Neural Grammar Magic Engine
+======================================================
 
-Implementation of the fundamental binding operations for tensor product
-variable binding, based on Smolensky (1990).
+🎯 ELI5 EXPLANATION:
+==================
+Think of Tensor Product Binding like creating a magical grammar system that lets computers understand language structure like humans do!
 
-Key Features:
-- Multiple binding methods (outer product, circular convolution, etc.)
-- Efficient vector operations
-- Memory-optimized representations
-- Research-accurate implementations
+Imagine you're playing with LEGO blocks, but instead of just stacking them, you have a special "binding tool" that can magically fuse any two blocks together in a way that preserves both their individual properties AND their relationship. That's exactly what tensor product binding does with information:
+
+1. 🎭 **Role Vectors**: Like grammar slots - "subject", "verb", "object" in a sentence
+2. 🎯 **Filler Vectors**: Like the actual words - "John", "loves", "Mary"  
+3. 🔗 **Binding Magic**: Mathematically fuse role+filler so you can store "John-is-subject" as one compact representation
+4. 🧠 **Neural Compatible**: Works with how real brains might process structured information!
+
+It's like having a universal translator that can take any sentence structure and compress it into brain-friendly vectors while keeping all the grammatical relationships intact!
+
+🔬 RESEARCH FOUNDATION:
+======================
+Core neural symbolic architecture theory from cognitive science pioneers:
+- **Smolensky (1990)**: "Tensor product variable binding" - Original neural binding breakthrough  
+- **Plate (1995)**: "Holographic reduced representations" - Vector symbolic architectures
+- **Hinton (1990)**: "Mapping part-whole hierarchies into connectionist networks" - Structured representations
+- **Marcus (2001)**: "The algebraic mind" - Symbolic structure in neural systems
+
+🧮 MATHEMATICAL PRINCIPLES:
+==========================
+**Tensor Product Binding:**
+role ⊗ filler = R ⊗ F (outer product creates structured representation)
+
+**Circular Convolution Binding:**
+(r ⊛ f)ₖ = Σᵢ rᵢ f₍ₖ₋ᵢ₎ mod n (memory-efficient alternative)
+
+**Unbinding Recovery:**
+F̂ = (R ⊗ F) ⊗ R⁻¹ (recover filler given role)
+
+**Superposition:**
+S = α₁(R₁ ⊗ F₁) + α₂(R₂ ⊗ F₂) + ... (multiple bindings)
+
+📊 TENSOR PRODUCT BINDING VISUALIZATION:
+=======================================
+```
+🔗 TENSOR PRODUCT BINDING ENGINE 🔗
+
+Grammar Structure           Binding Operations              Neural Representation
+┌─────────────────┐        ┌─────────────────────────────┐  ┌─────────────────┐
+│ 🎭 ROLES        │        │                             │  │ 🧠 BOUND MEMORY │
+│ "subject"       │ ────→  │  🔗 OUTER PRODUCT:          │→ │ Compact vectors │
+│ "verb"          │        │  • R ⊗ F tensor operation  │  │ storing full    │
+│ "object"        │        │  • Preserves structure     │  │ sentence info   │
+└─────────────────┘        │  • Neural compatible       │  │                 │
+                           │                             │  │ 🔍 RETRIEVAL    │
+┌─────────────────┐        │  🌀 CIRCULAR CONVOLUTION:   │  │ Extract any     │
+│ 🎯 FILLERS      │ ────→  │  • Memory efficient        │  │ role-filler     │
+│ "John"          │        │  • FFT optimized           │  │ combination     │
+│ "loves"         │        │  • Robust binding          │  │                 │
+│ "Mary"          │        │                             │  │ ✨ COMPOSITION  │
+└─────────────────┘        │  ➕ SUPERPOSITION:          │  │ Multiple        │
+                           │  • Combine multiple bindings│  │ sentences in    │
+┌─────────────────┐        │  • Weighted summation      │  │ single vector   │
+│ ⚙️ Operations    │ ────→  │  • Hierarchical structure  │  │                 │
+│ bind(), unbind()│        │                             │  │ 🎯 GRAMMAR      │
+│ superpose()     │        └─────────────────────────────┘  │ Structured      │
+└─────────────────┘                       │                 │ representations │
+                                          ▼                 │ for neural nets │
+                               RESULT: Neural grammar that  └─────────────────┘
+                                      computers understand! 🚀
+```
+
+💰 SUPPORT THIS RESEARCH:
+=========================
+🙏 If this library helps your research:
+💳 PayPal: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS
+💖 GitHub Sponsors: https://github.com/sponsors/benedictchen
 
 Author: Benedict Chen (benedict@benedictchen.com)
-Based on: Smolensky (1990) tensor product binding theory
+Based on: Smolensky's foundational tensor product binding theory
 """
 
 import numpy as np
@@ -39,7 +101,7 @@ class BindingOperation(Enum):
 
 
 @dataclass
-class TPBVector:
+class TPRVector:
     """
     🎯 Tensor Product Binding Vector
     
@@ -82,7 +144,7 @@ class TPBVector:
         """Get vector norm"""
         return np.linalg.norm(self.data)
     
-    def normalize(self) -> 'TPBVector':
+    def normalize(self) -> 'TPRVector':
         """Return normalized copy of vector"""
         norm = self.norm
         if norm > 0:
@@ -90,7 +152,7 @@ class TPBVector:
         else:
             normalized_data = self.data.copy()
         
-        return TPBVector(
+        return TPRVector(
             data=normalized_data,
             role=self.role,
             filler=self.filler,
@@ -98,7 +160,7 @@ class TPBVector:
             binding_info=self.binding_info.copy()
         )
     
-    def similarity(self, other: 'TPBVector') -> float:
+    def similarity(self, other: 'TPRVector') -> float:
         """Compute cosine similarity with another TPB vector"""
         if self.data.shape != other.data.shape:
             raise ValueError("Vectors must have same shape for similarity")
@@ -147,8 +209,8 @@ class TensorProductBinding:
         self.noise_level = noise_level
         
         # Initialize vector storage
-        self.role_vectors: Dict[str, TPBVector] = {}
-        self.filler_vectors: Dict[str, TPBVector] = {} 
+        self.role_vectors: Dict[str, TPRVector] = {}
+        self.filler_vectors: Dict[str, TPRVector] = {} 
         self.cleanup_vectors = cleanup_vectors or {}
         
         # Binding operation statistics
@@ -158,7 +220,7 @@ class TensorProductBinding:
             'failed_unbindings': 0
         }
     
-    def create_role_vector(self, role_name: str, vector_data: Optional[np.ndarray] = None) -> TPBVector:
+    def create_role_vector(self, role_name: str, vector_data: Optional[np.ndarray] = None) -> TPRVector:
         """
         Create or retrieve a role vector.
         
@@ -171,7 +233,7 @@ class TensorProductBinding:
             
         Returns
         -------
-        TPBVector
+        TPRVector
             The role vector
         """
         if role_name in self.role_vectors:
@@ -183,7 +245,7 @@ class TensorProductBinding:
             if self.normalize:
                 vector_data = vector_data / np.linalg.norm(vector_data)
         
-        role_vector = TPBVector(
+        role_vector = TPRVector(
             data=vector_data,
             role=role_name,
             is_bound=False,
@@ -193,7 +255,7 @@ class TensorProductBinding:
         self.role_vectors[role_name] = role_vector
         return role_vector
     
-    def create_filler_vector(self, filler_name: str, vector_data: Optional[np.ndarray] = None) -> TPBVector:
+    def create_filler_vector(self, filler_name: str, vector_data: Optional[np.ndarray] = None) -> TPRVector:
         """
         Create or retrieve a filler vector.
         
@@ -206,7 +268,7 @@ class TensorProductBinding:
             
         Returns
         -------
-        TPBVector
+        TPRVector
             The filler vector
         """
         if filler_name in self.filler_vectors:
@@ -218,7 +280,7 @@ class TensorProductBinding:
             if self.normalize:
                 vector_data = vector_data / np.linalg.norm(vector_data)
         
-        filler_vector = TPBVector(
+        filler_vector = TPRVector(
             data=vector_data,
             filler=filler_name,
             is_bound=False,
@@ -228,27 +290,32 @@ class TensorProductBinding:
         self.filler_vectors[filler_name] = filler_vector
         return filler_vector
     
-    def bind(self, role: Union[str, TPBVector], filler: Union[str, TPBVector]) -> TPBVector:
+    def bind(self, role: Union[str, TPRVector, np.ndarray], filler: Union[str, TPRVector, np.ndarray]) -> TPRVector:
         """
         Bind a role vector to a filler vector.
         
         Parameters
         ----------
-        role : str or TPBVector
-            Role to bind (creates if string)
-        filler : str or TPBVector
-            Filler to bind (creates if string)
+        role : str, TPRVector, or np.ndarray
+            Role to bind (creates TPRVector if string or numpy array)
+        filler : str, TPRVector, or np.ndarray
+            Filler to bind (creates TPRVector if string or numpy array)
             
         Returns
         -------
-        TPBVector
+        TPRVector
             Bound representation
         """
         # Convert strings to vectors
         if isinstance(role, str):
             role = self.create_role_vector(role)
+        elif isinstance(role, np.ndarray):
+            role = TPRVector(data=role, role="numpy_role", filler=None, is_bound=False)
+        
         if isinstance(filler, str):
             filler = self.create_filler_vector(filler)
+        elif isinstance(filler, np.ndarray):
+            filler = TPRVector(data=filler, role=None, filler="numpy_filler", is_bound=False)
         
         # Perform binding based on method
         if self.binding_method == BindingOperation.OUTER_PRODUCT:
@@ -272,7 +339,7 @@ class TensorProductBinding:
             bound_data = bound_data / np.linalg.norm(bound_data)
         
         # Create bound vector
-        bound_vector = TPBVector(
+        bound_vector = TPRVector(
             data=bound_data,
             role=role.role,
             filler=filler.filler,
@@ -310,28 +377,34 @@ class TensorProductBinding:
             raise ValueError("Multiplication binding requires same-dimension vectors")
         return role_data * filler_data
     
-    def unbind(self, bound_vector: TPBVector, role: Union[str, TPBVector]) -> TPBVector:
+    def unbind(self, bound_vector: Union[TPRVector, np.ndarray], role: Union[str, TPRVector, np.ndarray]) -> TPRVector:
         """
         Attempt to unbind a filler from a bound vector using a role.
         
         Parameters
         ----------
-        bound_vector : TPBVector
+        bound_vector : TPRVector or np.ndarray
             The bound vector to unbind from
-        role : str or TPBVector
+        role : str, TPRVector, or np.ndarray
             The role vector to use for unbinding
             
         Returns
         -------
-        TPBVector
+        TPRVector
             Reconstructed filler vector
         """
+        # Handle numpy array inputs
+        if isinstance(bound_vector, np.ndarray):
+            bound_vector = TPRVector(data=bound_vector, role=None, filler=None, is_bound=True)
+            
         if isinstance(role, str):
             if role in self.role_vectors:
                 role = self.role_vectors[role]
             else:
                 warnings.warn(f"Role '{role}' not found in stored vectors")
                 return None
+        elif isinstance(role, np.ndarray):
+            role = TPRVector(data=role, role="numpy_role", filler=None, is_bound=False)
         
         # Perform unbinding based on original binding method
         method = bound_vector.binding_info.get('method', self.binding_method.value)
@@ -349,7 +422,7 @@ class TensorProductBinding:
                 raise ValueError(f"Unknown unbinding method: {method}")
             
             # Create unbound vector
-            unbound_vector = TPBVector(
+            unbound_vector = TPRVector(
                 data=unbound_data,
                 role=None,
                 filler=f"unbound_from_{bound_vector.filler or 'unknown'}",
@@ -396,20 +469,20 @@ class TensorProductBinding:
         unbound_fft = bound_fft * role_fft_conj / safe_denominator
         return np.fft.ifft(unbound_fft).real
     
-    def superpose(self, vectors: List[TPBVector], weights: Optional[List[float]] = None) -> TPBVector:
+    def superpose(self, vectors: List[TPRVector], weights: Optional[List[float]] = None) -> TPRVector:
         """
         Create superposition of multiple bound vectors.
         
         Parameters
         ----------
-        vectors : List[TPBVector]
+        vectors : List[TPRVector]
             Vectors to superpose
         weights : List[float], optional
             Weights for each vector
             
         Returns
         -------
-        TPBVector
+        TPRVector
             Superposed vector
         """
         if not vectors:
@@ -438,7 +511,7 @@ class TensorProductBinding:
         role_names = [v.role for v in vectors if v.role]
         filler_names = [v.filler for v in vectors if v.filler]
         
-        superposed_vector = TPBVector(
+        superposed_vector = TPRVector(
             data=superposed_data,
             role=f"superposed_roles_{'+'.join(role_names[:3])}" if role_names else None,
             filler=f"superposed_fillers_{'+'.join(filler_names[:3])}" if filler_names else None,

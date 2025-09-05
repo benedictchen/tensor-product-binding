@@ -1,4 +1,29 @@
 """
+📋 Semantic Structures
+=======================
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 🏗️ Compositional Semantics - Semantic Data Structures Module
 ===========================================================
 
@@ -109,9 +134,9 @@ __all__ = [
 
 
 if __name__ == "__main__":
-    print("🏗️ Compositional Semantics - Semantic Data Structures Module")
+    # print("🏗️ Compositional Semantics - Semantic Data Structures Module")
     print("=" * 63)
-    print("📊 MODULE CONTENTS:")
+    # Removed print spam: "...
     print("  • SemanticType - Enumeration of semantic structure types")
     print("  • SemanticFrame - Role-filler frame representations")
     print("  • ConceptualRole - Thematic roles with semantic constraints") 
@@ -119,5 +144,5 @@ if __name__ == "__main__":
     print("  • SemanticRole - Basic semantic role definitions")
     print("  • SemanticConcept - Complete concept definitions with features")
     print("")
-    print("✅ Semantic data structures module loaded successfully!")
+    # # Removed print spam: "...
     print("🔬 Essential data structures for compositional semantic representation!")

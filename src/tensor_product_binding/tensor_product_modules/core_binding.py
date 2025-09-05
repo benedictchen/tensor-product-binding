@@ -1,4 +1,37 @@
 """
+🧠 Core Binding
+================
+
+🔬 Research Foundation:
+======================
+Based on tensor product representation theory:
+- Smolensky, P. (1990). "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+- Plate, T.A. (1995). "Holographic Reduced Representations"
+- Gayler, R.W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience"
+🎯 ELI5 Summary:
+This is the brain of our operation! Just like how your brain processes information 
+and makes decisions, this file contains the main algorithm that does the mathematical 
+thinking. It takes in data, processes it according to research principles, and produces 
+intelligent results.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+🧠 Core Algorithm Architecture:
+===============================
+    Input → Processing → Output
+      ↓         ↓         ↓
+  [Data]  [Algorithm]  [Result]
+      ↓         ↓         ↓
+     📊        ⚙️        ✨
+     
+Mathematical Foundation → Implementation → Research Application
+
+"""
+"""
 Core Tensor Product Binding Operations
 
 This module implements the fundamental tensor product binding mechanisms
@@ -8,7 +41,7 @@ from Smolensky (1990), including binding methods.
 import numpy as np
 from typing import Dict, List, Optional, Union
 from .config_enums import BindingMethod, BindingOperation, TensorBindingConfig
-from .vector_operations import TPBVector
+from .vector_operations import TPRVector
 
 
 class CoreBinding:
@@ -28,7 +61,7 @@ class CoreBinding:
              filler_name: str = "",
              role_vectors: Optional[Dict[str, np.ndarray]] = None,
              filler_vectors: Optional[Dict[str, np.ndarray]] = None,
-             operation: Optional[BindingOperation] = None) -> TPBVector:
+             operation: Optional[BindingOperation] = None) -> TPRVector:
         """
         Create Tensor Product Binding Between Role and Filler
         
@@ -47,7 +80,7 @@ class CoreBinding:
             operation: Binding operation type (for compatibility)
             
         Returns:
-            TPBVector: Flattened tensor product binding
+            TPRVector: Flattened tensor product binding
         """
         
         # Set binding strength
@@ -101,7 +134,7 @@ class CoreBinding:
         
         # Use proper tensor product binding - flatten the outer product matrix
         tensor_product = np.outer(role_vec, filler_vec) * binding_strength
-        return TPBVector(tensor_product.flatten())
+        return TPRVector(tensor_product.flatten())
     
     def _bind_basic_outer_product(self, role_vec: np.ndarray, filler_vec: np.ndarray, 
                                  binding_strength: float) -> np.ndarray:
@@ -241,7 +274,7 @@ class CoreBinding:
         
         return base_tensor
 
-    def _bind_circular_convolution(self, role_vec: TPBVector, filler_vec: TPBVector, binding_strength: float = 1.0):
+    def _bind_circular_convolution(self, role_vec: TPRVector, filler_vec: TPRVector, binding_strength: float = 1.0):
         """
         Circular convolution binding (Holographic Reduced Representations)
         Based on Plate (1995) "Holographic Reduced Representations"
@@ -282,9 +315,9 @@ class CoreBinding:
         if binding_strength != 1.0:
             bound_result = bound_result * binding_strength
         
-        return TPBVector(bound_result) if hasattr(role_vec, 'data') else bound_result
+        return TPRVector(bound_result) if hasattr(role_vec, 'data') else bound_result
 
-    def _bind_holographic_reduced(self, role_vec: TPBVector, filler_vec: TPBVector, binding_strength: float = 1.0):
+    def _bind_holographic_reduced(self, role_vec: TPRVector, filler_vec: TPRVector, binding_strength: float = 1.0):
         """
         Full Holographic Reduced Representations implementation
         Based on Plate (1995) with complete HRR algebra
@@ -306,9 +339,9 @@ class CoreBinding:
         else:
             normalized_data = data
         
-        return TPBVector(normalized_data) if hasattr(role_vec, 'data') else normalized_data
+        return TPRVector(normalized_data) if hasattr(role_vec, 'data') else normalized_data
 
-    def _bind_vector_matrix_multiplication(self, role_vec: TPBVector, filler_vec: TPBVector, binding_strength: float = 1.0):
+    def _bind_vector_matrix_multiplication(self, role_vec: TPRVector, filler_vec: TPRVector, binding_strength: float = 1.0):
         """
         Vector-matrix multiplication binding approach
         Based on Smolensky (1990) alternative tensor product formulation
@@ -338,4 +371,4 @@ class CoreBinding:
         if binding_strength != 1.0:
             bound_result = bound_result * binding_strength
         
-        return TPBVector(bound_result) if hasattr(role_vec, 'data') else bound_result
+        return TPRVector(bound_result) if hasattr(role_vec, 'data') else bound_result

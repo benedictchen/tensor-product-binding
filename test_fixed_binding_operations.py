@@ -30,7 +30,7 @@ def test_binding_operations():
         role_vec = TPBVector(np.array([1.0, 0.5, -0.3, 0.8]))
         filler_vec = TPBVector(np.array([0.2, -0.7, 1.0, 0.4]))
         
-        print(f'📊 Test Vectors:')
+        # Removed print spam: f'...
         print(f'   Role Vector: {role_vec.data}')
         print(f'   Filler Vector: {filler_vec.data}')
         print()
@@ -41,7 +41,7 @@ def test_binding_operations():
         
         for operation in BindingOperation:
             try:
-                print(f'✅ Testing {operation.value} binding operation...')
+                # Removed print spam: f'...
                 
                 # Call the binding method with the specific operation
                 result = core_binding.bind(
@@ -60,7 +60,7 @@ def test_binding_operations():
                 if isinstance(result_data, np.ndarray) and len(result_data) > 0:
                     print(f'   Result shape: {result_data.shape}')
                     print(f'   Result range: [{result_data.min():.3f}, {result_data.max():.3f}]')
-                    print(f'   ✅ {operation.value} binding: SUCCESS')
+                    # Removed print spam: f'   ...
                     operations_passed += 1
                 else:
                     print(f'   ❌ {operation.value} binding: Invalid result')
@@ -78,13 +78,13 @@ def test_binding_operations():
                 print()
         
         # Summary
-        print(f'🎯 Test Results Summary:')
+        # Removed print spam: f'...
         print(f'   Operations tested: {operations_tested}')
         print(f'   Operations passed: {operations_passed}') 
         print(f'   Success rate: {(operations_passed/operations_tested*100):.1f}%')
         
         if operations_passed == operations_tested:
-            print(f'\n✅ ALL BINDING OPERATIONS WORKING - NotImplementedError eliminated!')
+            # Removed print spam: f'\n...
             print(f'📚 Research Citations: Smolensky (1990), Plate (1995)')
             return True
         else:
@@ -121,7 +121,7 @@ def test_specific_operations():
                 role_vec, filler_vec,
                 operation=BindingOperation.CIRCULAR_CONVOLUTION
             )
-            print(f'   ✅ Circular convolution result: {result.data[:4]}...')
+            # Removed print spam: f'   ...
         except Exception as e:
             print(f'   ❌ Circular convolution failed: {e}')
         
@@ -132,7 +132,7 @@ def test_specific_operations():
                 role_vec, filler_vec,
                 operation=BindingOperation.HOLOGRAPHIC_REDUCED
             )
-            print(f'   ✅ Holographic reduced result: {result.data[:4]}...')
+            # Removed print spam: f'   ...
         except Exception as e:
             print(f'   ❌ Holographic reduced failed: {e}')
         
@@ -143,11 +143,11 @@ def test_specific_operations():
                 role_vec, filler_vec,
                 operation=BindingOperation.VECTOR_MATRIX_MULTIPLICATION
             )
-            print(f'   ✅ Vector-matrix multiplication result: {result.data[:4]}...')
+            # Removed print spam: f'   ...
         except Exception as e:
             print(f'   ❌ Vector-matrix multiplication failed: {e}')
             
-        print('\n🎉 All specific operations tested successfully!')
+        # Removed print spam: '\n...
         return True
         
     except Exception as e:
@@ -156,15 +156,15 @@ def test_specific_operations():
 
 def main():
     """Run all tests"""
-    print('🚀 Testing Fixed Tensor Product Binding NotImplementedError Issues')
+    # Removed print spam: '...
     print('================================================================')
     
     success1 = test_binding_operations()
     success2 = test_specific_operations()
     
-    print('\n📊 FINAL RESULTS:')
+    # Removed print spam: '\n...
     if success1 and success2:
-        print('✅ ALL TESTS PASSED - Tensor Product Binding NotImplementedError FIXED!')
+        # Removed print spam: '...
         print('🔬 Research-accurate implementations of Smolensky (1990) and Plate (1995)')
         return True
     else:

@@ -1,4 +1,30 @@
 """
+📋 Algorithms
+==============
+
+🎯 ELI5 Summary:
+This is the brain of our operation! Just like how your brain processes information 
+and makes decisions, this file contains the main algorithm that does the mathematical 
+thinking. It takes in data, processes it according to research principles, and produces 
+intelligent results.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 🧮 Core Algorithms for Tensor Product Binding
 =============================================
 
@@ -19,7 +45,7 @@ Based on: Smolensky (1990) algorithms for tensor product binding
 import numpy as np
 from typing import List, Dict, Optional, Tuple, Union, Any
 import warnings
-from .binding_operations import TPBVector, BindingOperation
+from .binding_operations import TPRVector, BindingOperation
 
 
 def bind_vectors(role: np.ndarray, 
@@ -197,17 +223,17 @@ def cleanup_vector(vector: np.ndarray,
         return vector
 
 
-def structural_similarity(structure1: List[TPBVector],
-                         structure2: List[TPBVector],
+def structural_similarity(structure1: List[TPRVector],
+                         structure2: List[TPRVector],
                          weight_by_magnitude: bool = True) -> float:
     """
     Compute similarity between two structural representations.
     
     Parameters
     ----------
-    structure1 : List[TPBVector]
+    structure1 : List[TPRVector]
         First structural representation
-    structure2 : List[TPBVector]  
+    structure2 : List[TPRVector]  
         Second structural representation
     weight_by_magnitude : bool
         Whether to weight by vector magnitudes

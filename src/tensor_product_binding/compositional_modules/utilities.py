@@ -1,4 +1,29 @@
 """
+🔧 Utilities
+=============
+
+🎯 ELI5 Summary:
+This is like a toolbox full of helpful utilities! Just like how a carpenter has 
+different tools for different jobs (hammer, screwdriver, saw), this file contains helpful 
+functions that other parts of our code use to get their work done.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 🔧 Compositional Semantics - Utility Functions Module
 ===================================================
 
@@ -165,13 +190,13 @@ __all__ = [
 
 
 if __name__ == "__main__":
-    print("🔧 Compositional Semantics - Utility Functions Module")
+    # Removed print spam: "...
     print("=" * 56)
-    print("📊 MODULE CONTENTS:")
+    # Removed print spam: "...
     print("  • create_semantic_lexicon - Create lexicon from concept specifications")
     print("  • create_standard_semantic_frames - Standard semantic frames for predicates")
     print("  • parse_simple_logical_form - Parse logical forms into predicate and arguments") 
     print("  • semantic_similarity_matrix - Compute concept similarity matrices")
     print("")
-    print("✅ Utility functions module loaded successfully!")
+    # # Removed print spam: "...
     print("🔬 Essential utilities for compositional semantic processing!")

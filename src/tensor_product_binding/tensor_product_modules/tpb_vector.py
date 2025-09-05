@@ -1,4 +1,20 @@
 """
+📋 Tpb Vector
+==============
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+"""
+"""
 🎯 Tensor Product Binding - Vector Representation Classes
 ========================================================
 
@@ -13,14 +29,14 @@ Based on: Smolensky (1990) "Tensor Product Variable Binding and the Representati
 🔬 Research Foundation:
 ======================
 Vector representations implementing Smolensky's (1990) framework:
-- TPBVector: Distributed representation of roles, fillers, and compositions
+- TPRVector: Distributed representation of roles, fillers, and compositions
 - BindingPair: Role-filler relationship with binding metadata  
 - Mathematical operations: Tensor products, unbinding, similarity metrics
 - Systematic composition: Supports recursive and hierarchical structures
 
 ELI5 Explanation:
 ================
-Think of TPBVectors like special containers that hold information! 📦
+Think of TPRVectors like special containers that hold information! 📦
 
 🎭 **Role Vectors** (like job descriptions):
 - "AGENT" vector represents "who does the action"
@@ -74,7 +90,7 @@ ASCII Vector Operations:
 ==============================
 ```python
 @dataclass
-class TPBVector:
+class TPRVector:
     vector: np.ndarray      # The actual numerical representation
     label: str              # Human-readable identifier  
     vector_type: str        # 'role', 'filler', or 'bound'
@@ -82,9 +98,9 @@ class TPBVector:
     
 @dataclass  
 class BindingPair:
-    role: TPBVector         # What role this represents
-    filler: TPBVector       # What fills that role
-    bound: TPBVector        # The tensor product result
+    role: TPRVector         # What role this represents
+    filler: TPRVector       # What fills that role
+    bound: TPRVector        # The tensor product result
     binding_strength: float # Confidence/clarity of binding
 ```
 
@@ -99,7 +115,7 @@ from .tpb_enums import BindingOperation
 
 
 @dataclass
-class TPBVector:
+class TPRVector:
     """
     🎯 Tensor Product Binding Vector
     
@@ -122,7 +138,7 @@ class TPBVector:
     Examples
     --------
     >>> # Create a role vector
-    >>> agent_role = TPBVector(
+    >>> agent_role = TPRVector(
     ...     data=np.random.randn(64),
     ...     role="agent", 
     ...     filler=None,
@@ -130,7 +146,7 @@ class TPBVector:
     ... )
     >>> 
     >>> # Create a filler vector
-    >>> john_filler = TPBVector(
+    >>> john_filler = TPRVector(
     ...     data=np.random.randn(64),
     ...     role=None,
     ...     filler="john", 
@@ -152,9 +168,9 @@ class TPBVector:
         if len(self.data) == 0:
             raise ValueError("Vector data cannot be empty")
     
-    def copy(self) -> 'TPBVector':
+    def copy(self) -> 'TPRVector':
         """Create a deep copy of this vector."""
-        return TPBVector(
+        return TPRVector(
             data=self.data.copy(),
             role=self.role,
             filler=self.filler,
@@ -172,7 +188,7 @@ class TPBVector:
         """Get vector norm (magnitude)."""
         return np.linalg.norm(self.data)
     
-    def normalize(self) -> 'TPBVector':
+    def normalize(self) -> 'TPRVector':
         """Return a normalized version of this vector."""
         norm = self.norm
         if norm == 0:
@@ -183,13 +199,13 @@ class TPBVector:
         result.data = normalized_data
         return result
     
-    def similarity(self, other: 'TPBVector') -> float:
+    def similarity(self, other: 'TPRVector') -> float:
         """
         Compute cosine similarity with another vector.
         
         Parameters
         ----------
-        other : TPBVector
+        other : TPRVector
             The other vector to compare with
             
         Returns
@@ -197,8 +213,8 @@ class TPBVector:
         float
             Cosine similarity between -1 and 1
         """
-        if not isinstance(other, TPBVector):
-            raise TypeError("Can only compute similarity with other TPBVector")
+        if not isinstance(other, TPRVector):
+            raise TypeError("Can only compute similarity with other TPRVector")
         
         norm_self = self.norm
         norm_other = other.norm
@@ -219,7 +235,7 @@ class TPBVector:
             vector_type.append("bound=True")
         
         type_str = ", ".join(vector_type) if vector_type else "untyped"
-        return f"TPBVector(dim={len(self.data)}, {type_str})"
+        return f"TPRVector(dim={len(self.data)}, {type_str})"
 
 
 @dataclass
@@ -231,20 +247,20 @@ class BindingPair:
     
     Attributes
     ----------
-    role : TPBVector
+    role : TPRVector
         The role vector (e.g., "agent", "patient", "location")
-    filler : TPBVector  
+    filler : TPRVector  
         The filler vector (e.g., "john", "mary", "kitchen")
-    bound_vector : TPBVector
+    bound_vector : TPRVector
         The result of binding role and filler
     binding_operation : BindingOperation
         The operation used to create the binding
         
     Examples
     --------
-    >>> agent = TPBVector(np.random.randn(64), role="agent")
-    >>> john = TPBVector(np.random.randn(64), filler="john")  
-    >>> bound = TPBVector(np.random.randn(4096), is_bound=True)
+    >>> agent = TPRVector(np.random.randn(64), role="agent")
+    >>> john = TPRVector(np.random.randn(64), filler="john")  
+    >>> bound = TPRVector(np.random.randn(4096), is_bound=True)
     >>> 
     >>> pair = BindingPair(
     ...     role=agent,
@@ -253,19 +269,19 @@ class BindingPair:
     ...     binding_operation=BindingOperation.OUTER_PRODUCT
     ... )
     """
-    role: TPBVector
-    filler: TPBVector
-    bound_vector: TPBVector
+    role: TPRVector
+    filler: TPRVector
+    bound_vector: TPRVector
     binding_operation: BindingOperation
     
     def __post_init__(self):
         """Validate binding pair after initialization."""
-        if not isinstance(self.role, TPBVector):
-            raise TypeError("Role must be a TPBVector")
-        if not isinstance(self.filler, TPBVector):
-            raise TypeError("Filler must be a TPBVector")  
-        if not isinstance(self.bound_vector, TPBVector):
-            raise TypeError("Bound vector must be a TPBVector")
+        if not isinstance(self.role, TPRVector):
+            raise TypeError("Role must be a TPRVector")
+        if not isinstance(self.filler, TPRVector):
+            raise TypeError("Filler must be a TPRVector")  
+        if not isinstance(self.bound_vector, TPRVector):
+            raise TypeError("Bound vector must be a TPRVector")
         if not isinstance(self.binding_operation, BindingOperation):
             raise TypeError("Binding operation must be a BindingOperation enum")
             
@@ -289,18 +305,18 @@ class BindingPair:
 
 # Export the vector classes
 __all__ = [
-    'TPBVector',
+    'TPRVector',
     'BindingPair'
 ]
 
 
 if __name__ == "__main__":
-    print("🎯 Tensor Product Binding - Vector Classes Module")
+    # Removed print spam: "...
     print("=" * 55)
-    print("📊 MODULE CONTENTS:")
-    print("  • TPBVector - Core vector representation with metadata")
+    # Removed print spam: "...
+    print("  • TPRVector - Core vector representation with metadata")
     print("  • BindingPair - Bound role-filler relationship representation") 
     print("  • Research-accurate vector classes for tensor product binding")
     print("")
-    print("✅ Vector classes module loaded successfully!")
+    # # Removed print spam: "...
     print("🔬 Essential data structures for Smolensky (1990) TPB framework!")

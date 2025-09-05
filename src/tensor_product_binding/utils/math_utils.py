@@ -1,4 +1,35 @@
 """
+🔧 Math Utils
+==============
+
+🔬 Research Foundation:
+======================
+Based on tensor product representation theory:
+- Smolensky, P. (1990). "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+- Plate, T.A. (1995). "Holographic Reduced Representations"
+- Gayler, R.W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience"
+🎯 ELI5 Summary:
+This is like a toolbox full of helpful utilities! Just like how a carpenter has 
+different tools for different jobs (hammer, screwdriver, saw), this file contains helpful 
+functions that other parts of our code use to get their work done.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 🧮 Mathematical Utilities for Tensor Product Binding
 ====================================================
 

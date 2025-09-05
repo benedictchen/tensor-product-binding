@@ -1,4 +1,29 @@
 """
+📋 Advanced Composition
+========================
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 🎯 Compositional Semantics - Composition Methods Module
 ======================================================
 
@@ -30,7 +55,7 @@ import re
 # Import TYPE_CHECKING to allow forward references without circular imports
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from ..tensor_product_binding import TensorProductBinding, TPBVector
+    from ..tensor_product_binding import TensorProductBinding, TPRVector
     from ..symbolic_structures import SymbolicStructure, SymbolicStructureEncoder
     from .semantic_structures import SemanticConcept, SemanticType
     from .semantic_engine import CompositionalSemantics
@@ -375,9 +400,9 @@ __all__ = ['AdvancedCompositionMixin']
 
 
 if __name__ == "__main__":
-    print("🎯 Compositional Semantics - Advanced Composition Methods Module")
+    # Removed print spam: "...
     print("=" * 70)
-    print("📊 MODULE CONTENTS:")
+    # Removed print spam: "...
     print("  • AdvancedCompositionMixin - Advanced composition methods")
     print("  • Frame-based composition for predicate-argument structures")
     print("  • Sentence-level compositional processing with syntax")
@@ -385,5 +410,5 @@ if __name__ == "__main__":
     print("  • Semantic decomposition and meaning vector analysis")
     print("  • WordNet integration for large-scale semantic lexicons")
     print("")
-    print("✅ Advanced composition methods module loaded successfully!")
+    # # Removed print spam: "...
     print("🔬 Complex compositional semantics for structured representation!")

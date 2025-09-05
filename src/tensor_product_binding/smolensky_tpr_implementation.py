@@ -1,4 +1,29 @@
 """
+📋 Smolensky Tpr Implementation
+================================
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 Smolensky (1990) TPR Implementation
 ===================================================
 
@@ -570,7 +595,7 @@ if __name__ == "__main__":
     config = create_smolensky_accurate_config()
     tpr_system = create_smolensky_tpr_system(config)
     
-    print("✅ System created with Smolensky (1990) configuration")
+    # # Removed print spam: "... configuration")
     
     # Test binding
     print("\n🔗 Testing role-filler binding...")
@@ -578,14 +603,14 @@ if __name__ == "__main__":
     print(f"   Bound 'AGENT + John' → TPR with rank {agent_john_tpr.rank}")
     
     # Test decomposition
-    print("\n🔍 Testing decomposition...")
+    # Removed print spam: "\n...
     roles, fillers = tpr_system.decompose_tpr(agent_john_tpr)
     print(f"   Extracted {len(roles)} role(s) and {len(fillers)} filler(s)")
     
     # Test systematicity
-    print("\n🎯 Testing systematicity...")
+    # Removed print spam: "\n...
     test_combinations = [("PATIENT", "John"), ("AGENT", "Mary"), ("PATIENT", "Mary")]
     productivity = tpr_system.measure_productivity(test_combinations)
     print(f"   Productivity score: {productivity.get('productivity_score', 0):.2f}")
     
-    print("\n✅ Research-accurate TPR system demonstration complete!")
+    # Removed print spam: "\n...

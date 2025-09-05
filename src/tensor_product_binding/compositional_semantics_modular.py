@@ -1,4 +1,20 @@
 """
+📋 Compositional Semantics Modular
+===================================
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+"""
+"""
 💰 SUPPORT THIS RESEARCH - PLEASE DONATE! 💰
 
 🙏 If this library helps your research or project, please consider donating:
@@ -129,7 +145,7 @@ Your support enables continued research in structured neural-symbolic AI!
 if __name__ == "__main__":
     print("🧠 Compositional Semantics - Modular Implementation")
     print("=" * 55)
-    print("🏗️ MODULAR ARCHITECTURE SUCCESS:")
+    # print("🏗️ MODULAR ARCHITECTURE SUCCESS:")
     print("  Original: compositional_semantics.py (1010 lines)")
     print("  ▼ MODULARIZED ▼")
     print("  ├─ semantic_structures.py (124 lines)")  
@@ -137,8 +153,8 @@ if __name__ == "__main__":
     print("  ├─ advanced_composition.py (391 lines)")
     print("  └─ utilities.py (178 lines)")
     print("")
-    print("📊 TOTAL: 1105 lines → 4 focused modules (100% < 412 lines)")
-    print("✅ 800-line compliance achieved!")
+    # Removed print spam: "...")
+    # # Removed print spam: "...
     print("")
     print("🔬 Smolensky (1990) compositional semantics - fully modularized!")
     print("💰 Please donate to support continued research!")

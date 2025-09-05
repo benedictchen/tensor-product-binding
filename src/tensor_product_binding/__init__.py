@@ -1,4 +1,29 @@
 """
+📋   Init  
+============
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 💰 SUPPORT THIS RESEARCH - PLEASE DONATE! 💰
 
 🙏 If this library helps your research or project, please consider donating:
@@ -36,11 +61,13 @@ This package is organized into clean, focused modules:
 - visualization: Plotting and analysis tools
 """
 
-# Core tensor product binding functionality
+# Main tensor product binding functionality (research-accurate implementation)
+from .tensor_product_binding import TensorProductBinding, TPRVector, BindingOperation, BindingPair
+from .tensor_product_binding import create_tpr_system, demo_tensor_binding
+
+# Core utilities and additional functionality
 from .core import (
-    TensorProductBinding,
-    TPBVector,
-    BindingOperation,
+    TensorProductBinder,  # Add the alias
     VectorSpace,
     SymbolicVector,
     bind_vectors,
@@ -189,9 +216,9 @@ def _print_attribution():
 
 
 # Convenience factory functions
-def create_tpb_system(vector_dim: int = 100, **kwargs) -> TensorProductBinding:
+def create_tpr_system(vector_dim: int = 100, **kwargs) -> TensorProductBinding:
     """
-    Create a tensor product binding system with sensible defaults.
+    Create a tensor product representation system with sensible defaults.
     
     Parameters
     ----------
@@ -203,7 +230,7 @@ def create_tpb_system(vector_dim: int = 100, **kwargs) -> TensorProductBinding:
     Returns
     -------
     TensorProductBinding
-        Configured TPB system
+        Configured TPR system
     """
     return TensorProductBinding(vector_dim=vector_dim, **kwargs)
 
@@ -248,7 +275,9 @@ __all__ = [
     
     # Main classes
     "TensorProductBinding",
-    "TPBVector", 
+    "TensorProductBinder",  # Add the alias to exports
+    "TPRVector", 
+    "BindingPair",
     "VectorSpace",
     "SymbolicVector",
     
@@ -332,7 +361,8 @@ __all__ = [
     "vector_space_analysis",
     
     # === FACTORY FUNCTIONS ===
-    "create_tpb_system",
+    "create_tpr_system",
+    "demo_tensor_binding",
     "create_neural_binding_network",
 ]
 

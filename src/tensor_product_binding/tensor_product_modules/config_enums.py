@@ -1,4 +1,43 @@
 """
+⚙️ Config Enums
+================
+
+🔬 Research Foundation:
+======================
+Based on tensor product representation theory:
+- Smolensky, P. (1990). "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+- Plate, T.A. (1995). "Holographic Reduced Representations"
+- Gayler, R.W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience"
+🎯 ELI5 Summary:
+Think of this like a control panel for our algorithm! Just like how your TV remote 
+has different buttons for volume, channels, and brightness, this file has all the settings 
+that control how our AI algorithm behaves. Researchers can adjust these settings to get 
+the best results for their specific problem.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+⚙️ Configuration Architecture:
+==============================
+    ┌─────────────────────────┐
+    │    USER SETTINGS        │
+    ├─────────────────────────┤
+    │ • Algorithm Parameters  │
+    │ • Performance Options   │
+    │ • Research Preferences  │
+    │ • Output Formats        │
+    └─────────────────────────┘
+              ↓
+    ┌─────────────────────────┐
+    │      ALGORITHM          │
+    │    (Configured)         │
+    └─────────────────────────┘
+
+"""
+"""
 Configuration, Enums, and Data Classes for Tensor Product Binding
 
 This module contains all configuration parameters, enumeration types,

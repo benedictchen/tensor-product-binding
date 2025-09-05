@@ -1,4 +1,21 @@
 """
+📋 Neural Binding Original 1207 Lines
+======================================
+
+🔬 Research Foundation:
+======================
+Based on tensor product representation theory:
+- Smolensky, P. (1990). "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+- Plate, T.A. (1995). "Holographic Reduced Representations"
+- Gayler, R.W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience"
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+"""
+"""
 💰 SUPPORT THIS RESEARCH - PLEASE DONATE! 💰
 
 🙏 If this library helps your research or project, please consider donating:

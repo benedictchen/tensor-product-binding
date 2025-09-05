@@ -1,4 +1,31 @@
 """
+🧠 Tpb Core
+============
+
+🎯 ELI5 Summary:
+This is the brain of our operation! Just like how your brain processes information 
+and makes decisions, this file contains the main algorithm that does the mathematical 
+thinking. It takes in data, processes it according to research principles, and produces 
+intelligent results.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+🧠 Core Algorithm Architecture:
+===============================
+    Input → Processing → Output
+      ↓         ↓         ↓
+  [Data]  [Algorithm]  [Result]
+      ↓         ↓         ↓
+     📊        ⚙️        ✨
+     
+Mathematical Foundation → Implementation → Research Application
+
+"""
+"""
 🧠 Tensor Product Binding - Core Implementation Module
 ====================================================
 
@@ -29,7 +56,7 @@ import numpy as np
 import warnings
 from typing import Union, Optional, Dict, List, Any
 from .tpb_enums import BindingOperation
-from .tpb_vector import TPBVector, BindingPair
+from .tpb_vector import TPRVector, BindingPair
 
 
 class TensorProductBinding:
@@ -65,10 +92,10 @@ class TensorProductBinding:
         
     Attributes
     ----------
-    role_vectors_ : Dict[str, TPBVector]
+    role_vectors_ : Dict[str, TPRVector]
         Dictionary of role vectors created by the system.
         
-    filler_vectors_ : Dict[str, TPBVector]
+    filler_vectors_ : Dict[str, TPRVector]
         Dictionary of filler vectors created by the system.
         
     bindings_ : List[BindingPair]
@@ -137,7 +164,7 @@ class TensorProductBinding:
         print(f"🧠 TensorProductBinding initialized: {role_dimension}D roles × {filler_dimension}D fillers "
               f"→ {self.bound_dimension}D bound vectors ({binding_type_str})")
     
-    def create_role_vector(self, role_name: str, data: Optional[np.ndarray] = None) -> TPBVector:
+    def create_role_vector(self, role_name: str, data: Optional[np.ndarray] = None) -> TPRVector:
         """
         Create a role vector for a given role name.
         
@@ -150,7 +177,7 @@ class TensorProductBinding:
             
         Returns
         -------
-        TPBVector
+        TPRVector
             The role vector
         """
         if role_name in self.role_vectors_:
@@ -162,7 +189,7 @@ class TensorProductBinding:
             if self.normalize_vectors:
                 data = data / np.linalg.norm(data)
         
-        role_vector = TPBVector(
+        role_vector = TPRVector(
             data=data,
             role=role_name,
             filler=None,
@@ -172,7 +199,7 @@ class TensorProductBinding:
         self.role_vectors_[role_name] = role_vector
         return role_vector
     
-    def create_filler_vector(self, filler_name: str, data: Optional[np.ndarray] = None) -> TPBVector:
+    def create_filler_vector(self, filler_name: str, data: Optional[np.ndarray] = None) -> TPRVector:
         """
         Create a filler vector for a given filler name.
         
@@ -185,7 +212,7 @@ class TensorProductBinding:
             
         Returns
         -------
-        TPBVector
+        TPRVector
             The filler vector
         """
         if filler_name in self.filler_vectors_:
@@ -197,7 +224,7 @@ class TensorProductBinding:
             if self.normalize_vectors:
                 data = data / np.linalg.norm(data)
         
-        filler_vector = TPBVector(
+        filler_vector = TPRVector(
             data=data,
             role=None,
             filler=filler_name,
@@ -209,10 +236,10 @@ class TensorProductBinding:
     
     def bind(
         self, 
-        role: TPBVector, 
-        filler: TPBVector,
+        role: TPRVector, 
+        filler: TPRVector,
         binding_operation: Optional[BindingOperation] = None
-    ) -> TPBVector:
+    ) -> TPRVector:
         """
         Bind a role vector with a filler vector.
         
@@ -220,10 +247,10 @@ class TensorProductBinding:
         
         Parameters
         ----------
-        role : TPBVector
+        role : TPRVector
             Role vector to bind.
             
-        filler : TPBVector
+        filler : TPRVector
             Filler vector to bind.
             
         binding_operation : BindingOperation, optional
@@ -231,7 +258,7 @@ class TensorProductBinding:
             
         Returns
         -------
-        bound_vector : TPBVector
+        bound_vector : TPRVector
             Result of binding role and filler.
             
         Examples
@@ -294,7 +321,7 @@ class TensorProductBinding:
                 raise ValueError(f"Unknown binding operation: {operation}")
         
         # Create bound vector with comprehensive binding info
-        bound_vector = TPBVector(
+        bound_vector = TPRVector(
             data=bound_data,
             role=role.role,
             filler=filler.filler,
@@ -315,10 +342,10 @@ class TensorProductBinding:
     
     def unbind(
         self, 
-        bound_vector: TPBVector, 
-        probe_vector: TPBVector,
+        bound_vector: TPRVector, 
+        probe_vector: TPRVector,
         operation: Optional[BindingOperation] = None
-    ) -> TPBVector:
+    ) -> TPRVector:
         """
         Unbind a bound vector using a probe vector to retrieve the associated component.
         
@@ -326,16 +353,16 @@ class TensorProductBinding:
         
         Parameters
         ----------
-        bound_vector : TPBVector
+        bound_vector : TPRVector
             The bound vector to unbind
-        probe_vector : TPBVector
+        probe_vector : TPRVector
             The probe vector (either role or filler)
         operation : BindingOperation, optional
             Override the binding operation used
             
         Returns
         -------
-        TPBVector
+        TPRVector
             The retrieved vector (filler if probed with role, role if probed with filler)
             
         Examples
@@ -372,7 +399,7 @@ class TensorProductBinding:
                 else:
                     filler_data = np.zeros(self.filler_dimension)
                 
-                return TPBVector(
+                return TPRVector(
                     data=filler_data,
                     role=None,
                     filler=bound_vector.filler,
@@ -388,7 +415,7 @@ class TensorProductBinding:
                 else:
                     role_data = np.zeros(self.role_dimension)
                 
-                return TPBVector(
+                return TPRVector(
                     data=role_data,
                     role=bound_vector.role,
                     filler=None,
@@ -403,7 +430,7 @@ class TensorProductBinding:
             # Determine what we're retrieving
             if probe_vector.role is not None:
                 # Retrieved filler
-                return TPBVector(
+                return TPRVector(
                     data=retrieved_data,
                     role=None,
                     filler=bound_vector.filler,
@@ -411,7 +438,7 @@ class TensorProductBinding:
                 )
             else:
                 # Retrieved role
-                return TPBVector(
+                return TPRVector(
                     data=retrieved_data,
                     role=bound_vector.role,
                     filler=None,
@@ -423,14 +450,14 @@ class TensorProductBinding:
             retrieved_data = bound_vector.data - probe_vector.data
             
             if probe_vector.role is not None:
-                return TPBVector(
+                return TPRVector(
                     data=retrieved_data,
                     role=None,
                     filler=bound_vector.filler,
                     is_bound=False
                 )
             else:
-                return TPBVector(
+                return TPRVector(
                     data=retrieved_data,
                     role=bound_vector.role,
                     filler=None,
@@ -444,14 +471,14 @@ class TensorProductBinding:
                                     0)
             
             if probe_vector.role is not None:
-                return TPBVector(
+                return TPRVector(
                     data=retrieved_data,
                     role=None,
                     filler=bound_vector.filler,
                     is_bound=False
                 )
             else:
-                return TPBVector(
+                return TPRVector(
                     data=retrieved_data,
                     role=bound_vector.role,
                     filler=None,
@@ -461,13 +488,13 @@ class TensorProductBinding:
         else:
             raise ValueError(f"Unknown binding operation for unbinding: {operation}")
     
-    def similarity(self, vector1: TPBVector, vector2: TPBVector) -> float:
+    def similarity(self, vector1: TPRVector, vector2: TPRVector) -> float:
         """
         Compute cosine similarity between two vectors.
         
         Parameters
         ----------
-        vector1, vector2 : TPBVector
+        vector1, vector2 : TPRVector
             Vectors to compare
             
         Returns
@@ -477,7 +504,7 @@ class TensorProductBinding:
         """
         return vector1.similarity(vector2)
     
-    def compose(self, bindings: List[TPBVector]) -> TPBVector:
+    def compose(self, bindings: List[TPRVector]) -> TPRVector:
         """
         Compose multiple bound vectors into a superposed representation.
         
@@ -485,12 +512,12 @@ class TensorProductBinding:
         
         Parameters
         ----------
-        bindings : List[TPBVector]
+        bindings : List[TPRVector]
             List of bound vectors to compose
             
         Returns
         -------
-        TPBVector
+        TPRVector
             Composed representation
         """
         if not bindings:
@@ -505,7 +532,7 @@ class TensorProductBinding:
             if norm > 0:
                 composed_data = composed_data / norm
         
-        return TPBVector(
+        return TPRVector(
             data=composed_data,
             role=None,
             filler=None,
@@ -524,11 +551,11 @@ class TensorProductBinding:
         """Get all binding pairs created by this system."""
         return self.bindings_.copy()
     
-    def get_role_vectors(self) -> Dict[str, TPBVector]:
+    def get_role_vectors(self) -> Dict[str, TPRVector]:
         """Get all role vectors created by this system."""
         return self.role_vectors_.copy()
     
-    def get_filler_vectors(self) -> Dict[str, TPBVector]:
+    def get_filler_vectors(self) -> Dict[str, TPRVector]:
         """Get all filler vectors created by this system."""
         return self.filler_vectors_.copy()
     
@@ -558,11 +585,11 @@ __all__ = ['TensorProductBinding']
 if __name__ == "__main__":
     print("🧠 Tensor Product Binding - Core Implementation Module")
     print("=" * 60)
-    print("📊 MODULE CONTENTS:")
+    # Removed print spam: "...
     print("  • TensorProductBinding - Main TPB system implementation")
     print("  • Comprehensive research solutions with multiple user-configurable options")
     print("  • Research-accurate Smolensky (1990) tensor product binding")
     print("  • Complete binding, unbinding, and composition functionality")
     print("")
-    print("✅ Core implementation module loaded successfully!")
-    print("🔬 Complete TPB system with enhanced research accuracy!")
+    # # Removed print spam: "...
+    # print("🔬 Complete TPB system with enhanced research accuracy!")

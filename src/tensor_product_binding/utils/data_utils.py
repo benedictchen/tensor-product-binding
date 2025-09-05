@@ -1,4 +1,35 @@
 """
+🔧 Data Utils
+==============
+
+🔬 Research Foundation:
+======================
+Based on tensor product representation theory:
+- Smolensky, P. (1990). "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+- Plate, T.A. (1995). "Holographic Reduced Representations"
+- Gayler, R.W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience"
+🎯 ELI5 Summary:
+This is like a toolbox full of helpful utilities! Just like how a carpenter has 
+different tools for different jobs (hammer, screwdriver, saw), this file contains helpful 
+functions that other parts of our code use to get their work done.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 💾 Data Utilities for Tensor Product Binding
 ============================================
 
@@ -16,7 +47,7 @@ import numpy as np
 import warnings
 
 from ..config.config_classes import TensorBindingConfig
-from ..core.binding_operations import TPBVector
+from ..core.binding_operations import TPRVector
 
 
 def save_binding_state(vectors: Dict[str, Any],
@@ -44,12 +75,12 @@ def save_binding_state(vectors: Dict[str, Any],
     
     try:
         if format == 'npz':
-            # Convert TPBVector objects to arrays for npz
+            # Convert TPRVector objects to arrays for npz
             arrays_dict = {}
             metadata_dict = {}
             
             for name, vector in vectors.items():
-                if isinstance(vector, TPBVector):
+                if isinstance(vector, TPRVector):
                     arrays_dict[f"{name}_data"] = vector.data
                     metadata_dict[name] = {
                         'role': vector.role,
@@ -77,7 +108,7 @@ def save_binding_state(vectors: Dict[str, Any],
             # Convert numpy arrays to lists for JSON
             json_dict = {}
             for name, vector in vectors.items():
-                if isinstance(vector, TPBVector):
+                if isinstance(vector, TPRVector):
                     json_dict[name] = {
                         'data': vector.data.tolist(),
                         'role': vector.role,
@@ -154,12 +185,12 @@ def load_binding_state(filepath: Union[str, Path],
                 with open(metadata_file, 'r') as f:
                     metadata = json.load(f)
                 
-                # Reconstruct TPBVector objects
+                # Reconstruct TPRVector objects
                 for name, meta in metadata.items():
                     if isinstance(meta, dict) and 'role' in meta:
                         data_key = f"{name}_data"
                         if data_key in result:
-                            result[name] = TPBVector(
+                            result[name] = TPRVector(
                                 data=result[data_key],
                                 role=meta.get('role'),
                                 filler=meta.get('filler'),
@@ -181,8 +212,8 @@ def load_binding_state(filepath: Union[str, Path],
             result = {}
             for name, value in json_dict.items():
                 if isinstance(value, dict) and 'data' in value:
-                    # Reconstruct TPBVector
-                    result[name] = TPBVector(
+                    # Reconstruct TPRVector
+                    result[name] = TPRVector(
                         data=np.array(value['data']),
                         role=value.get('role'),
                         filler=value.get('filler'),
@@ -244,9 +275,9 @@ def export_vectors_csv(vectors: Dict[str, np.ndarray],
             
             # Write vectors
             for name, vector in vectors.items():
-                if isinstance(vector, TPBVector):
+                if isinstance(vector, TPRVector):
                     data = vector.data
-                    vector_type = 'TPBVector'
+                    vector_type = 'TPRVector'
                 elif isinstance(vector, np.ndarray):
                     data = vector
                     vector_type = 'ndarray'

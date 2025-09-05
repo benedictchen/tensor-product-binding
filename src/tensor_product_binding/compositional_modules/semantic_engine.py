@@ -1,4 +1,29 @@
 """
+📋 Semantic Engine
+===================
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 🧠 Compositional Semantics - Main Semantic Engine Module
 =======================================================
 
@@ -33,7 +58,7 @@ from .semantic_structures import (
 # Import TYPE_CHECKING to allow forward references without circular imports
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from ..tensor_product_binding import TensorProductBinding, BindingPair, TPBVector
+    from ..tensor_product_binding import TensorProductBinding, BindingPair, TPRVector
     from ..symbolic_structures import SymbolicStructureEncoder, SymbolicStructure, StructureType, Role, Filler
 
 
@@ -250,20 +275,20 @@ class CompositionalSemantics:
         self.add_semantic_concept(name, SemanticType.ENTITY, feature_set)
         return name
 
-    def get_concept_vector(self, name: str) -> "TPBVector":
-        """Get concept as TPBVector"""
+    def get_concept_vector(self, name: str) -> "TPRVector":
+        """Get concept as TPRVector"""
         vector_data = self.conceptual_space.get_concept(name)
         if vector_data is None:
             return None
         
-        from ..core.binding_operations import TPBVector
-        return TPBVector(data=vector_data, filler=name)
+        from ..core.binding_operations import TPRVector
+        return TPRVector(data=vector_data, filler=name)
 
     def add_semantic_role(self, role: SemanticRole):
         """Add a semantic role"""
         self.semantic_roles[role.name] = role
 
-    def compose_meaning(self, predicate: str, role_bindings: List[Tuple[str, str]]) -> "TPBVector":
+    def compose_meaning(self, predicate: str, role_bindings: List[Tuple[str, str]]) -> "TPRVector":
         """
         Compose meaning from predicate and role-filler bindings
         
@@ -296,7 +321,7 @@ class CompositionalSemantics:
         else:
             return self.binder.compose(bound_vectors)
 
-    def extract_role_filler(self, composition: "TPBVector", role: str) -> "TPBVector":
+    def extract_role_filler(self, composition: "TPRVector", role: str) -> "TPRVector":
         """
         Extract filler for a given role from a composed meaning
         
@@ -461,11 +486,11 @@ __all__ = ['CompositionalSemantics']
 if __name__ == "__main__":
     print("🧠 Compositional Semantics - Main Semantic Engine Module")
     print("=" * 59)
-    print("📊 MODULE CONTENTS:")
+    # Removed print spam: "...
     print("  • CompositionalSemantics - Core semantic composition engine")
     print("  • Tensor product binding for structured semantic representation")
     print("  • Role-filler binding with thematic role assignment")
     print("  • Compositional meaning construction and decomposition")
     print("")
-    print("✅ Semantic engine module loaded successfully!")
+    # # Removed print spam: "...
     print("🔬 Smolensky (1990) compositional semantics implementation!")

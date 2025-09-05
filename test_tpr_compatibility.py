@@ -26,14 +26,14 @@ def test_existing_functionality_preserved():
             NumPyBindingNetwork,
             TrainingConfig
         )
-        print("✅ Original imports preserved")
+        # # Removed print spam: "...
     except ImportError as e:
         print(f"❌ Original imports broken: {e}")
         return False
     
     # Test 2: Traditional tensor product binding still works
     try:
-        from tensor_product_binding.tpb_modules.complete_binding_implementation import CompleteTensorProductBinder as OldBinder
+        from tensor_product_binding.tpb_modules.complete_binding_implementation import TensorProductBinder as OldBinder
         
         # Create traditional binder (if it exists)
         vector_dim = 64
@@ -42,21 +42,21 @@ def test_existing_functionality_preserved():
         
         # Traditional outer product
         expected = np.outer(role, filler).flatten()
-        print("✅ Traditional tensor product computation preserved")
+        # # Removed print spam: "...
     except Exception as e:
         print(f"⚠️  Could not test old binder: {e}")
     
     # Test 3: New functionality is additive
     try:
         from tensor_product_binding.neural_modules import (
-            CompleteTensorProductBinder,
+            NeuralTensorProductBinder,
             NeuralBindingConfig,
             create_mlp_binder,
             create_attention_binder,
             create_cnn_binder,
             create_hybrid_binder
         )
-        print("✅ Neural implementations imported")
+        # # Removed print spam: "...
     except ImportError as e:
         print(f"❌ New neural imports failed: {e}")
         return False
@@ -64,7 +64,7 @@ def test_existing_functionality_preserved():
     # Test 4: New implementations can fall back to traditional
     try:
         config = NeuralBindingConfig(method='traditional', fallback_to_traditional=True)
-        binder = CompleteTensorProductBinder(vector_dim=64, config=config)
+        binder = NeuralTensorProductBinder(vector_dim=64, config=config)
         
         role = np.random.randn(64)
         filler = np.random.randn(64)
@@ -76,7 +76,7 @@ def test_existing_functionality_preserved():
         similarity = np.dot(result / np.linalg.norm(result), expected / np.linalg.norm(expected))
         
         if similarity > 0.99:
-            print("✅ Traditional fallback works correctly")
+            # # Removed print spam: "...
         else:
             print(f"⚠️  Traditional fallback similarity: {similarity:.3f}")
     except Exception as e:
@@ -100,15 +100,15 @@ def test_new_neural_functionality():
     
     for method in methods_to_test:
         try:
-            from tensor_product_binding.neural_modules import CompleteTensorProductBinder, NeuralBindingConfig
+            from tensor_product_binding.neural_modules import NeuralTensorProductBinder, NeuralBindingConfig
             
             config = NeuralBindingConfig(method=method, fallback_to_traditional=True)
-            binder = CompleteTensorProductBinder(vector_dim=vector_dim, config=config)
+            binder = NeuralTensorProductBinder(vector_dim=vector_dim, config=config)
             
             result = binder.bind(role, filler)
             results[method] = result
             
-            print(f"✅ {method.upper()} binding works")
+            # Removed print spam: f"...} binding works")
             
         except Exception as e:
             print(f"❌ {method.upper()} binding failed: {e}")
@@ -129,7 +129,7 @@ def test_new_neural_functionality():
         cnn_binder = create_cnn_binder(vector_dim=32)
         hybrid_binder = create_hybrid_binder(vector_dim=32)
         
-        print("✅ Factory functions work")
+        # # Removed print spam: "...
         
     except Exception as e:
         print(f"❌ Factory functions failed: {e}")
@@ -143,7 +143,7 @@ def test_configuration_flexibility():
     print("\n🎛️ Testing Configuration Flexibility...")
     
     try:
-        from tensor_product_binding.neural_modules import CompleteTensorProductBinder, NeuralBindingConfig
+        from tensor_product_binding.neural_modules import NeuralTensorProductBinder, NeuralBindingConfig
         
         # Test custom configuration
         custom_config = NeuralBindingConfig(
@@ -161,7 +161,7 @@ def test_configuration_flexibility():
             numerical_stability=True
         )
         
-        binder = CompleteTensorProductBinder(vector_dim=32, config=custom_config)
+        binder = NeuralTensorProductBinder(vector_dim=32, config=custom_config)
         
         # Test that configuration is applied
         config_info = binder.get_configuration()
@@ -169,12 +169,12 @@ def test_configuration_flexibility():
         assert len(config_info['config']['mlp_hidden_layers']) == 3
         assert config_info['config']['attention_heads'] == 4
         
-        print("✅ Custom configuration works")
+        # # Removed print spam: "...
         
         # Test individual method selection
         for method in ['mlp', 'attention', 'cnn', 'traditional']:
             config = NeuralBindingConfig(method=method)
-            binder = CompleteTensorProductBinder(vector_dim=32, config=config)
+            binder = NeuralTensorProductBinder(vector_dim=32, config=config)
             
             role = np.random.randn(32)
             filler = np.random.randn(32)
@@ -183,7 +183,7 @@ def test_configuration_flexibility():
             assert result is not None
             assert len(result) == 32 * 32
         
-        print("✅ Individual method selection works")
+        # # Removed print spam: "...
         
     except Exception as e:
         print(f"❌ Configuration flexibility failed: {e}")
@@ -202,12 +202,12 @@ def test_backward_compatibility():
         
         # This should work even though it's abstract
         # (Users might have existing subclasses)
-        print("✅ Base class import preserved")
+        # # Removed print spam: "...
         
         # Test that method signatures are preserved
-        from tensor_product_binding.neural_modules import CompleteTensorProductBinder
+        from tensor_product_binding.neural_modules import NeuralTensorProductBinder
         
-        binder = CompleteTensorProductBinder(vector_dim=32)
+        binder = NeuralTensorProductBinder(vector_dim=32)
         
         # These methods should exist and have compatible signatures
         role = np.random.randn(32)
@@ -238,7 +238,7 @@ def test_backward_compatibility():
         eval_result = binder.evaluate(test_data)
         assert isinstance(eval_result, dict)
         
-        print("✅ Method signatures preserved")
+        # # Removed print spam: "...
         
     except Exception as e:
         print(f"❌ Backward compatibility failed: {e}")
@@ -249,7 +249,7 @@ def test_backward_compatibility():
 
 def run_all_tests():
     """Run all preservation and functionality tests"""
-    print("🚀 TENSOR PRODUCT BINDING - FUNCTIONALITY PRESERVATION TEST SUITE")
+    # # Removed print spam: "...
     print("=" * 70)
     
     all_passed = True
@@ -268,11 +268,11 @@ def run_all_tests():
     
     print("\n" + "=" * 70)
     if all_passed:
-        print("🎉 ALL TESTS PASSED - FUNCTIONALITY PRESERVED & ENHANCED!")
-        print("✅ Existing functionality: PRESERVED")
-        print("✅ New neural methods: WORKING")
-        print("✅ Configuration options: FLEXIBLE")
-        print("✅ Backward compatibility: MAINTAINED")
+        # Removed print spam: "...
+        # # Removed print spam: "...
+        # # Removed print spam: "...
+        # # Removed print spam: "...
+        # # Removed print spam: "...
     else:
         print("❌ SOME TESTS FAILED - REVIEW NEEDED")
     

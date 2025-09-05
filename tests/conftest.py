@@ -7,7 +7,7 @@ import numpy as np
 from typing import Dict, List, Any
 
 # Import the main classes we'll be testing
-from src.tensor_product_binding import TensorProductBinding
+from tensor_product_binding import TensorProductBinding
 # Note: create_tpb_system is not available in src module - using direct instantiation
 
 

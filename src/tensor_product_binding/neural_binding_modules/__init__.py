@@ -1,4 +1,29 @@
 """
+📋   Init  
+============
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+📋 Component Integration:
+========================
+    ┌──────────┐
+    │   This   │
+    │Component │ ←→ Other Components
+    └──────────┘
+         ↑↓
+    System Integration
+
+"""
+"""
 🏗️ Neural Binding Modules - Modular Architecture
 ==============================================
 
@@ -135,21 +160,33 @@ __all__.append('create_neural_binding_network')
 
 
 if __name__ == "__main__":
-    print("🏗️ Neural Binding Modules - Modular Architecture")
+    # print("🏗️ Neural Binding Modules - Modular Architecture")
     print("=" * 55)
-    print("📊 MODULAR COMPONENTS:")
+    # Removed print spam: "...
     print("  • configuration.py      - Training and architecture configs")
     print("  • abstract_base.py      - Abstract base class interface") 
     print("  • numpy_implementation.py - Pure Python neural binding")
     if PYTORCH_AVAILABLE:
-        print("  • pytorch_implementation.py - GPU-accelerated neural binding ✅")
+        # Removed print spam: "  • pytorch_implementation.py - GPU-accelerated neural binding ...
     else:
         print("  • pytorch_implementation.py - GPU-accelerated neural binding ❌ (PyTorch not available)")
     print("")
-    print("✅ All modular components loaded successfully!")
+    # # Removed print spam: "...
     print("🔬 Research-accurate neural tensor product binding networks!")
-    print(f"⚡ PyTorch acceleration: {'Available' if PYTORCH_AVAILABLE else 'Not Available'}")
+    # Removed print spam: f"...
     print("")
     print("🏭 Usage:")
     print("   from neural_binding_modules import create_neural_binding_network")
     print("   network = create_neural_binding_network('numpy', vector_dim=128)")
+
+print("""
+💰 MODULE SUPPORT - Made possible by Benedict Chen
+   ]8;;mailto:benedict@benedictchen.com\benedict@benedictchen.com]8;;\
+
+💰 PLEASE DONATE! Your support keeps this research alive! 💰
+   🔗 ]8;;https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WXQKYYKPHWXHS\💳 CLICK HERE TO DONATE VIA PAYPAL]8;;\
+   ❤️ ]8;;https://github.com/sponsors/benedictchen\💖 SPONSOR ON GITHUB]8;;\
+
+   ☕ Buy me a coffee → 🍺 Buy me a beer → 🏎️ Buy me a Lamborghini → ✈️ Buy me a private jet!
+   (Start small, dream big! Every donation helps! 😄)
+""")

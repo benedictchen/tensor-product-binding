@@ -1,4 +1,20 @@
 """
+📋   Init  
+============
+
+🎯 ELI5 Summary:
+This file is an important component in our AI research system! Like different organs 
+in your body that work together to keep you healthy, this file has a specific job that 
+helps the overall algorithm work correctly and efficiently.
+
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+"""
+"""
 🏗️ Tensor Product Binding Modules - Distributed Symbolic Architecture
 =====================================================================
 
@@ -65,7 +81,7 @@ ASCII Module Architecture:
     ┌─────────────────┐       ┌─────────────────────┐
     │ Get final       │       │ tpb_vector.py       │
     │ bound           │ ◀───  │ ┌─────────────────┐ │
-    │ representation  │       │ │ TPBVector       │ │
+    │ representation  │       │ │ TPRVector       │ │
     └─────────────────┘       │ │ BindingPair     │ │
                               │ │ - vector data   │ │
                               │ │ - metadata      │ │
@@ -75,7 +91,7 @@ ASCII Module Architecture:
 ⚡ Module Organization:
 ======================
 1. **tpb_core.py**: Main TensorProductBinding class and core operations
-2. **tpb_vector.py**: Vector data structures (TPBVector, BindingPair)
+2. **tpb_vector.py**: Vector data structures (TPRVector, BindingPair)
 3. **tpb_enums.py**: Operation type definitions and mathematical options
 4. **tpb_factory.py**: Convenience functions and educational demonstrations
 
@@ -100,14 +116,14 @@ from .config_enums import (
     BindingPair
 )
 
-from .vector_operations import TPBVector
+from .vector_operations import TPRVector
 
 from .core_binding import CoreBinding
 
 try:
     # New modular tensor_product_binding.py components  
     from .tpb_enums import BindingOperation as ModularBindingOperation
-    from .tpb_vector import TPBVector as ModularTPBVector, BindingPair as ModularBindingPair
+    from .tpb_vector import TPRVector as ModularTPRVector, BindingPair as ModularBindingPair
     from .tpb_core import TensorProductBinding
     from .tpb_factory import create_tpb_system, demo_tensor_binding, create_linguistic_example
     
@@ -130,7 +146,7 @@ __all__ = [
     'UnbindingMethod', 
     'TensorBindingConfig',
     'BindingPair',
-    'TPBVector',
+    'TPRVector',
     'CoreBinding',
 ]
 

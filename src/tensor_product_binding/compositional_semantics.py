@@ -1,4 +1,21 @@
 """
+📋 Compositional Semantics
+===========================
+
+🔬 Research Foundation:
+======================
+Based on tensor product representation theory:
+- Smolensky, P. (1990). "Tensor Product Variable Binding and the Representation of Symbolic Structures"
+- Plate, T.A. (1995). "Holographic Reduced Representations"
+- Gayler, R.W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience"
+🧪 Technical Details:
+===================
+Implementation details and technical specifications for this component.
+Designed to work seamlessly within the research framework while
+maintaining high performance and accuracy standards.
+
+"""
+"""
 💰 SUPPORT THIS RESEARCH - PLEASE DONATE! 💰
 
 🙏 If this library helps your research or project, please consider donating:
@@ -75,7 +92,7 @@ import re
 # Import TYPE_CHECKING to allow forward references without circular imports
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from .tensor_product_binding import TensorProductBinding, BindingPair, TPBVector
+    from .tensor_product_binding import TensorProductBinding, BindingPair, TPRVector
     from .symbolic_structures import SymbolicStructureEncoder, SymbolicStructure, StructureType, Role, Filler
 
 class SemanticType(Enum):
@@ -348,21 +365,21 @@ class CompositionalSemantics:
         self.concepts[name] = concept
         return name
     
-    def get_concept_vector(self, name: str) -> "TPBVector":
-        """Get concept vector as TPBVector"""
-        from .tpb_modules import TPBVector
+    def get_concept_vector(self, name: str) -> "TPRVector":
+        """Get concept vector as TPRVector"""
+        from .tensor_product_modules import TPRVector
         vector = self.encode_semantic_concept(name)
         if vector is not None:
-            return TPBVector(vector)
+            return TPRVector(vector)
         raise ValueError(f"Concept {name} not found")
     
     def add_semantic_role(self, role: SemanticRole):
         """Add semantic role to the system"""
         self.semantic_roles[role.name] = role
     
-    def compose_meaning(self, predicate: str, role_bindings: List[Tuple[str, str]]) -> "TPBVector":
+    def compose_meaning(self, predicate: str, role_bindings: List[Tuple[str, str]]) -> "TPRVector":
         """Compose meaning from predicate and role bindings"""
-        from .tpb_modules import TPBVector
+        from .tensor_product_modules import TPRVector
         from .symbolic_structures import SymbolicStructure, StructureType
         
         bindings_dict = dict(role_bindings)
@@ -373,11 +390,11 @@ class CompositionalSemantics:
         structure.bindings = bindings_dict
         
         vector = self.structure_encoder.encode_structure(structure)
-        return TPBVector(vector)
+        return TPRVector(vector)
     
-    def extract_role_filler(self, composition: "TPBVector", role: str) -> "TPBVector":
+    def extract_role_filler(self, composition: "TPRVector", role: str) -> "TPRVector":
         """Extract role filler from composition"""
-        from .tpb_modules import TPBVector
+        from .tensor_product_modules import TPRVector
         
         # Simple approximation for testing - return a vector that's reasonably similar
         # to what would be expected from the original binding
@@ -395,10 +412,10 @@ class CompositionalSemantics:
             if np.linalg.norm(extracted_vec) > 0:
                 extracted_vec = extracted_vec / np.linalg.norm(extracted_vec)
             
-            return TPBVector(extracted_vec)
+            return TPRVector(extracted_vec)
         else:
             # Return random vector as fallback
-            return TPBVector(np.random.normal(0, 1, self.concept_dim))
+            return TPRVector(np.random.normal(0, 1, self.concept_dim))
     
     def add_concept_relation(self, concept1: str, concept2: str, relation: str):
         """Add relation between concepts"""
